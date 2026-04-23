@@ -112,7 +112,7 @@
     /* ---------- Hero ---------- */
     .hero {
       flex: 1;
-      padding: 0 0 60px;
+      padding: 0;
       display: flex;
       flex-direction: column;
       max-width: 100%;
@@ -122,9 +122,10 @@
     }
 
     .hero-content {
+      order: -1;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 56px 56px 0;
+      padding: 56px 56px 52px;
       width: 100%;
     }
 
@@ -245,21 +246,19 @@
       font-weight: 400;
       font-size: 22px;
       line-height: 1.5;
-      color: var(--near-black);
+      color: #3d3d3d;
       max-width: 720px;
       margin: 0 auto 24px;
       font-style: italic;
-      opacity: 0.85;
       text-align: center;
     }
 
     .body-copy {
       font-size: 15px;
       line-height: 1.75;
-      color: var(--near-black);
+      color: #444;
       max-width: 720px;
       margin: 0 auto;
-      opacity: 0.88;
       text-align: center;
     }
 
@@ -269,7 +268,6 @@
 
     .body-copy .lead-paragraph {
       color: var(--dark-green);
-      opacity: 1;
     }
 
     /* ---------- Pillars ---------- */
@@ -331,6 +329,7 @@
       animation: fadeIn 1.4s ease 0.3s both;
       overflow: hidden;
       background: var(--paper);
+      border-top: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule);
     }
 
@@ -345,14 +344,12 @@
       position: absolute;
       inset: 0;
       opacity: 0;
-      transform: scale(1.0);
-      transition: opacity 3000ms cubic-bezier(0.25, 0.1, 0.25, 1), transform 3500ms cubic-bezier(0.25, 0.1, 0.25, 1);
-      transform-origin: center center;
+      transition: opacity 700ms ease;
     }
 
     .frame.active {
       opacity: 1;
-      transform: scale(1.04);
+      animation: kenBurns 10s linear forwards;
     }
 
     .frame svg {
@@ -363,47 +360,61 @@
 
     .phase-indicator {
       position: absolute;
-      top: 14px;
-      left: 14px;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 5;
       display: flex;
       gap: 5px;
+      align-items: center;
     }
 
     .phase-dot {
-      width: 22px;
-      height: 3px;
-      background: rgba(26, 26, 26, 0.18);
-      transition: background 0.6s ease;
+      width: 24px;
+      height: 2px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.22);
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: background 0.3s ease;
     }
 
     .phase-dot:hover {
-      background: rgba(26, 26, 26, 0.4);
+      background: rgba(255, 255, 255, 0.42);
     }
 
     .phase-dot.active {
-      background: var(--terra);
+      background: rgba(255, 255, 255, 0.12);
     }
 
-    .phase-dot.active:hover {
-      background: var(--terra-deep);
+    .phase-dot.active::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.88);
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: dotFill var(--dot-dur, 4000ms) linear forwards;
     }
 
     .phase-label {
       position: absolute;
-      bottom: 14px;
-      left: 14px;
+      top: 14px;
+      right: 14px;
       z-index: 5;
       font-family: var(--sans);
-      font-size: 10px;
-      letter-spacing: 0.22em;
+      font-size: 9px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--dark-green);
-      background: rgba(250, 248, 243, 0.92);
-      padding: 6px 12px;
+      background: rgba(250, 248, 243, 0.9);
+      padding: 5px 10px;
       font-weight: 500;
-      transition: opacity 0.5s ease;
+      opacity: 1;
+      transition: opacity 0.15s ease;
     }
 
     /* ---------- CTA / Contact strip ---------- */
@@ -529,8 +540,7 @@
       font-size: 11px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--near-black);
-      opacity: 0.55;
+      color: rgba(26, 26, 26, 0.45);
       font-weight: 400;
     }
 
@@ -576,6 +586,15 @@
       }
     }
 
+    @keyframes kenBurns {
+      from { transform: scale(1.0); }
+      to   { transform: scale(1.06); }
+    }
+
+    @keyframes dotFill {
+      to { transform: scaleX(1); }
+    }
+
     .ridge-line {
       stroke-dasharray: 1000;
       animation: drawLine 2.2s cubic-bezier(0.2, 0.7, 0.2, 1) 0.4s both;
@@ -603,7 +622,7 @@
       }
 
       .hero-content {
-        padding: 32px 28px 0;
+        padding: 36px 28px 44px;
       }
 
       .hero-visual {
@@ -628,7 +647,7 @@
       }
 
       .cta-email {
-        font-size: 24px;
+        font-size: 20px;
       }
 
       .contact-strip {
@@ -5360,58 +5379,89 @@
   </div>
 
   <script>
-    // Auto-cycle hero phase frames every 4 seconds; user can click dots to jump
     (function () {
-      const frames = document.querySelectorAll('.hero-visual .frame');
-      const dots = document.querySelectorAll('.hero-visual .phase-dot');
-      const label = document.getElementById('phaseLabel');
+      const visual  = document.querySelector('.hero-visual');
+      const frames  = document.querySelectorAll('.hero-visual .frame');
+      const dots    = document.querySelectorAll('.hero-visual .phase-dot');
+      const label   = document.getElementById('phaseLabel');
 
       const phaseNames = {
-        '1': 'Land',
-        '2': 'Site Work',
-        '3': 'Gas BTM + Fiber',
-        '4': 'DC Expansion',
-        '5': 'DC Expansion',
-        '6': 'DC Expansion + Utility',
-        '7': 'DC Expansion + Turbines',
+        '1': 'Land', '2': 'Site Work', '3': 'Gas BTM + Fiber',
+        '4': 'DC Expansion', '5': 'DC Expansion',
+        '6': 'DC Expansion + Utility', '7': 'DC Expansion + Turbines',
         '8': 'DC Expansion to Full Scale'
       };
 
+      const DURATION = { normal: 4000, last: 7000 };
       if (frames.length !== 8) return;
 
       let current = 1;
-      let timer = null;
+      let timer   = null;
+      let paused  = false;
+
+      function dur(n) { return n === 8 ? DURATION.last : DURATION.normal; }
 
       function showPhase(n) {
         current = n;
-        const cur = String(current);
-        frames.forEach(function (f) { f.classList.toggle('active', f.dataset.frame === cur); });
-        dots.forEach(function (d) { d.classList.toggle('active', d.dataset.dot === cur); });
-        if (label) label.textContent = phaseNames[cur];
-      }
+        const cur = String(n);
 
-      function advance() {
-        showPhase(current === 8 ? 1 : current + 1);
+        frames.forEach(f => f.classList.toggle('active', f.dataset.frame === cur));
+
+        // Remove and re-add .active to force the fill animation to restart
+        dots.forEach(d => {
+          const on = d.dataset.dot === cur;
+          d.classList.remove('active');
+          if (on) {
+            void d.offsetWidth; // force reflow
+            d.style.setProperty('--dot-dur', dur(n) + 'ms');
+            d.classList.add('active');
+          }
+        });
+
+        if (label) {
+          label.style.opacity = '0';
+          setTimeout(() => { label.textContent = phaseNames[cur]; label.style.opacity = ''; }, 140);
+        }
       }
 
       function startTimer() {
-        if (timer) clearTimeout(timer);
-        function scheduleNext() {
-          var delay = (current === 8) ? 6000 : 3000;
-          timer = setTimeout(function () { advance(); scheduleNext(); }, delay);
-        }
-        scheduleNext();
+        clearTimeout(timer);
+        if (paused) return;
+        timer = setTimeout(function tick() {
+          showPhase(current === 8 ? 1 : current + 1);
+          timer = setTimeout(tick, dur(current));
+        }, dur(current));
       }
 
-      // Click handler: jump immediately, restart timer
-      dots.forEach(function (d) {
-        d.addEventListener('click', function () {
-          const n = parseInt(d.dataset.dot, 10);
-          if (!isNaN(n)) {
-            showPhase(n);
-            startTimer();
-          }
-        });
+      // Pause while hovering so users can study the illustration
+      visual.addEventListener('mouseenter', () => { paused = true;  clearTimeout(timer); });
+      visual.addEventListener('mouseleave', () => { paused = false; startTimer(); });
+
+      // Dot clicks
+      dots.forEach(d => d.addEventListener('click', () => {
+        const n = parseInt(d.dataset.dot, 10);
+        if (!isNaN(n)) { showPhase(n); startTimer(); }
+      }));
+
+      // Touch swipe
+      let tx = 0, ty = 0;
+      visual.addEventListener('touchstart', e => {
+        tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+      }, { passive: true });
+      visual.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - tx;
+        const dy = e.changedTouches[0].clientY - ty;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          showPhase(dx < 0 ? Math.min(current + 1, 8) : Math.max(current - 1, 1));
+          startTimer();
+        }
+      }, { passive: true });
+
+      // Keyboard
+      visual.setAttribute('tabindex', '0');
+      visual.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') { showPhase(Math.min(current + 1, 8)); startTimer(); }
+        else if (e.key === 'ArrowLeft') { showPhase(Math.max(current - 1, 1)); startTimer(); }
       });
 
       startTimer();

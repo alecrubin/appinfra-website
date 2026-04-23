@@ -156,7 +156,7 @@
       position: relative; z-index: 3;
       flex: 1;
       display: flex; align-items: center; justify-content: center;
-      padding: 80px 48px 200px;
+      padding: 80px 48px 80px;
     }
 
     .hero-text { text-align: center; max-width: 960px; }
@@ -266,59 +266,8 @@
     }
 
     /* Mountain visual — tall and overlapping into content zone */
-    .hero-visual {
-      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
-      height: 40vh;
-      min-height: max(260px, 20vw);
-    }
-    .hero-visual svg { width: 100%; height: 100%; display: block; }
-    @media (max-width: 640px) {
-      .hero-body { padding-bottom: 240px; }
-    }
-    @media (max-height: 720px) {
-      .hero-body { padding-bottom: 140px; }
-    }
     @media (max-height: 580px) {
-      .hero-body { padding: 40px 48px 100px; }
-    }
-
-    /* Ridgeline glow stroke — thicker, brighter */
-    @keyframes ridgeGlow {
-      0%,100% { opacity: 0.65; filter: drop-shadow(0 0 5px rgba(245,166,35,0.5)) drop-shadow(0 0 16px rgba(245,166,35,0.18)); }
-      50%     { opacity: 1.0;  filter: drop-shadow(0 0 10px rgba(245,166,35,0.85)) drop-shadow(0 0 32px rgba(245,166,35,0.35)); }
-    }
-    .ridge-glow { animation: ridgeGlow 5s ease-in-out infinite; }
-
-    /* Valley light clusters — even/odd offset for natural feel */
-    @keyframes flicker {
-      0%,100% { opacity: 0.55; }
-      30%     { opacity: 0.85; }
-      60%     { opacity: 0.40; }
-      80%     { opacity: 0.90; }
-    }
-    @keyframes flicker2 {
-      0%,100% { opacity: 0.40; }
-      25%     { opacity: 0.80; }
-      55%     { opacity: 0.60; }
-      75%     { opacity: 0.30; }
-    }
-    .vl  { animation: flicker  4.5s ease-in-out infinite; }
-    .vl2 { animation: flicker2 3.8s ease-in-out 1.1s infinite; }
-    .vl3 { animation: flicker  5.2s ease-in-out 2.3s infinite; }
-
-    /* Scroll nudge — sits in flex flow just above the mountain visual */
-    .scroll-cue {
-      position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%); z-index: 5;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      color: var(--dim); opacity: 0;
-      animation: fadeIn 1s ease 1.8s forwards;
-    }
-    .scroll-cue span { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; }
-    .scroll-cue-chevron {
-      width: 16px; height: 16px;
-      border-right: 1.5px solid var(--dim); border-bottom: 1.5px solid var(--dim);
-      transform: rotate(45deg);
-      animation: bounce 2.2s ease infinite;
+      .hero-body { padding: 40px 48px 40px; }
     }
 
     /* ─── ANIMATIONS ─────────────────────────────────────────────────────── */
@@ -326,16 +275,9 @@
       from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; } to { opacity: 1; }
-    }
     @keyframes pulse {
       0%,100% { opacity: 1; transform: scale(1); }
       50%      { opacity: 0.45; transform: scale(0.75); }
-    }
-    @keyframes bounce {
-      0%,100% { transform: rotate(45deg) translate(0,0); }
-      50%      { transform: rotate(45deg) translate(3px,3px); }
     }
 
     /* ─── HERO AMBIENT ───────────────────────────────────────────────────── */
@@ -849,104 +791,6 @@
     </div>
   </div>
 
-  <!-- Mountain illustration — tall, layered, dramatically prominent -->
-  <div class="hero-visual">
-    <svg viewBox="0 200 1440 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
-      <defs>
-        <!-- Ridge stroke — amber hotspot at center, fades to edges -->
-        <linearGradient id="ridgeStroke" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"   stop-color="#F5A623" stop-opacity="0.0"/>
-          <stop offset="15%"  stop-color="#F5A623" stop-opacity="0.6"/>
-          <stop offset="50%"  stop-color="#FFE090" stop-opacity="1.0"/>
-          <stop offset="85%"  stop-color="#F5A623" stop-opacity="0.6"/>
-          <stop offset="100%" stop-color="#F5A623" stop-opacity="0.0"/>
-        </linearGradient>
-        <!-- Subtle blue rim light on far peaks -->
-        <linearGradient id="rimLight" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"   stop-color="#4A80CC" stop-opacity="0.0"/>
-          <stop offset="30%"  stop-color="#5A9AEE" stop-opacity="0.35"/>
-          <stop offset="70%"  stop-color="#5A9AEE" stop-opacity="0.35"/>
-          <stop offset="100%" stop-color="#4A80CC" stop-opacity="0.0"/>
-        </linearGradient>
-      </defs>
-
-      <!-- Ghost range — ultra-distant, nearly invisible atmospheric haze -->
-      <path d="M0,390 L72,318 L160,348 L260,285 L360,322 L460,272
-               L556,305 L652,258 L748,290 L844,248 L940,280 L1036,242
-               L1132,272 L1228,252 L1324,278 L1440,298 L1440,500 L0,500 Z"
-            fill="#0C1528" opacity="0.5"/>
-
-      <!-- Far range — tallest peaks, slight blue atmospheric cast -->
-      <path d="M0,415 L80,352 L172,378 L272,310 L375,345 L472,292
-               L568,328 L665,278 L762,312 L858,265 L955,300 L1050,270
-               L1148,298 L1244,278 L1340,308 L1440,325 L1440,500 L0,500 Z"
-            fill="#0F1A2E" opacity="0.82"/>
-
-      <!-- Blue rim light along far ridge peaks -->
-      <path d="M0,415 L80,352 L172,378 L272,310 L375,345 L472,292
-               L568,328 L665,278 L762,312 L858,265 L955,300 L1050,270
-               L1148,298 L1244,278 L1340,308 L1440,325"
-            fill="none" stroke="url(#rimLight)" stroke-width="1.5" opacity="0.7"/>
-
-      <!-- Mid range -->
-      <path d="M0,448 L90,408 L188,428 L285,388 L382,415 L478,375
-               L575,402 L672,362 L768,392 L865,355 L962,385 L1058,362
-               L1155,385 L1252,368 L1348,392 L1440,408 L1440,500 L0,500 Z"
-            fill="#121E30" opacity="0.92"/>
-
-      <!-- Foreground ridge — nearest and most defined -->
-      <path d="M0,500 L0,462 L92,430 L188,452 L285,420 L378,442
-               L472,410 L568,432 L665,402 L760,424 L856,396 L952,420
-               L1048,404 L1144,422 L1240,408 L1336,428 L1440,442 L1440,500 Z"
-            fill="#151F30"/>
-
-      <!-- Glowing ridgeline stroke on foreground — animated, thicker -->
-      <path d="M0,462 L92,430 L188,452 L285,420 L378,442
-               L472,410 L568,432 L665,402 L760,424 L856,396 L952,420
-               L1048,404 L1144,422 L1240,408 L1336,428 L1440,442"
-            fill="none" stroke="url(#ridgeStroke)" stroke-width="2.5"
-            class="ridge-glow"/>
-
-      <!-- Valley lights — front row, nestled in the foreground valley -->
-      <g class="vl">
-        <circle cx="548" cy="416" r="1.8" fill="#F5A623"/>
-        <circle cx="588" cy="412" r="2.0" fill="#F5A623"/>
-        <circle cx="628" cy="408" r="1.6" fill="#FCD34D"/>
-        <circle cx="668" cy="413" r="1.9" fill="#F5A623"/>
-        <circle cx="710" cy="406" r="2.2" fill="#FFF0AA"/>
-        <circle cx="752" cy="411" r="1.8" fill="#F5A623"/>
-        <circle cx="794" cy="407" r="2.0" fill="#FCD34D"/>
-        <circle cx="836" cy="412" r="1.7" fill="#F5A623"/>
-        <circle cx="876" cy="409" r="1.9" fill="#F5A623"/>
-      </g>
-      <!-- Valley lights — second row, slightly further back -->
-      <g class="vl2">
-        <circle cx="568" cy="428" r="1.3" fill="#F5A623"/>
-        <circle cx="610" cy="424" r="1.5" fill="#FCD34D"/>
-        <circle cx="652" cy="430" r="1.2" fill="#F5A623"/>
-        <circle cx="694" cy="425" r="1.6" fill="#FFF0AA"/>
-        <circle cx="736" cy="428" r="1.4" fill="#F5A623"/>
-        <circle cx="778" cy="424" r="1.3" fill="#FCD34D"/>
-        <circle cx="820" cy="427" r="1.5" fill="#F5A623"/>
-        <circle cx="860" cy="423" r="1.2" fill="#F5A623"/>
-      </g>
-      <!-- Valley lights — sparse third row -->
-      <g class="vl3">
-        <circle cx="490" cy="438" r="1.0" fill="#F5A623"/>
-        <circle cx="540" cy="435" r="1.2" fill="#FCD34D"/>
-        <circle cx="900" cy="436" r="1.1" fill="#F5A623"/>
-        <circle cx="942" cy="439" r="1.0" fill="#FCD34D"/>
-        <circle cx="596" cy="440" r="0.9" fill="#F5A623"/>
-        <circle cx="848" cy="438" r="1.1" fill="#F5A623"/>
-      </g>
-
-    </svg>
-  </div>
-
-  <div class="scroll-cue">
-    <span>Scroll</span>
-    <div class="scroll-cue-chevron"></div>
-  </div>
 </section>
 
 <!-- ═══════════════════════════════ STATS BAR ═══════════════════════════ -->

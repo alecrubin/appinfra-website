@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appalachia Infra | West Virginia Land, Power & Fiber</title>
+  <meta name="description" content="Appalachia Infra helps West Virginia landowners evaluate large acreage, power access, fiber proximity, and infrastructure readiness for AI and hyperscale development." />
+
+  <style>
+    :root {
+      --forest: #123a31;
+      --forest-2: #1e5144;
+      --sage: #dfe8df;
+      --sage-2: #eef3ed;
+      --cream: #f8f3e8;
+      --paper: #fffdf7;
+      --terra: #c96d4f;
+      --gold: #d6aa63;
+      --ink: #1d2925;
+      --muted: #64736d;
+      --white: #ffffff;
+      --line: rgba(18, 58, 49, .18);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Arial, Helvetica, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 7%;
+      background: rgba(255, 253, 247, .88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(18,58,49,.08);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--forest);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      font-size: 22px;
+    }
+
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      background: var(--forest);
+      color: var(--white);
+      font-family: var(--serif);
+      font-size: 24px;
+      border-radius: 2px;
+      box-shadow: 0 10px 25px rgba(18,58,49,.18);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .08em;
+      color: var(--forest);
+    }
+
+    .nav .nav-button {
+      background: var(--forest);
+      color: var(--white);
+      padding: 13px 22px;
+      border-radius: 2px;
+    }
+
+    .hero {
+      min-height: 850px;
+      position: relative;
+      overflow: hidden;
+      padding: 148px 7% 90px;
+      background:
+        linear-gradient(90deg, rgba(255,253,247,.98) 0%, rgba(255,253,247,.94) 38%, rgba(255,253,247,.42) 68%, rgba(255,253,247,.14) 100%),
+        url("https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=2400&q=86");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -8%;
+      bottom: -12%;
+      width: 72%;
+      height: 72%;
+      background: radial-gradient(circle, rgba(214,170,99,.36), transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(420px, 680px) minmax(420px, 1fr);
+      align-items: center;
+      gap: 60px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      color: var(--terra);
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(52px, 6vw, 92px);
+      line-height: .97;
+      letter-spacing: -.06em;
+      font-weight: 400;
+      color: var(--forest);
+      margin: 0 0 26px;
+    }
+
+    .hero-sub {
+      font-size: 23px;
+      line-height: 1.38;
+      color: #405049;
+      max-width: 610px;
+      margin: 0;
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 11px;
+      margin: 32px 0 38px;
+    }
+
+    .pill {
+      border: 1px solid rgba(18,58,49,.22);
+      background: rgba(255,255,255,.64);
+      padding: 10px 14px;
+      color: var(--forest);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: .06em;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 218px;
+      padding: 18px 24px;
+      border: 1px solid var(--forest);
+      color: var(--forest);
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: .065em;
+      transition: .2s ease;
+      background: rgba(255,255,255,.72);
+    }
+
+    .btn.primary {
+      background: var(--forest);
+      color: var(--white);
+      box-shadow: 0 14px 34px rgba(18,58,49,.18);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: var(--terra);
+      border-color: var(--terra);
+      color: var(--white);
+    }
+
+    .build-card {
+      background: rgba(255,253,247,.88);
+      border: 1px solid rgba(18,58,49,.16);
+      box-shadow: 0 25px 80px rgba(18,58,49,.18);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .build-card h2 {
+      font-family: var(--serif);
+      font-size: 31px;
+      line-height: 1.08;
+      font-weight: 400;
+      color: var(--forest);
+      margin: 0 0 18px;
+    }
+
+    .progression {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .progress-panel {
+      min-height: 275px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: end;
+      padding: 18px;
+      color: white;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .progress-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(18,58,49,.05), rgba(18,58,49,.82));
+      z-index: 0;
+    }
+
+    .progress-panel span {
+      position: relative;
+      z-index: 1;
+      font-family: var(--serif);
+      font-size: 22px;
+      line-height: 1.05;
+    }
+
+    .raw { background-image: url("https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=82"); }
+    .ready { background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=82"); }
+    .campus { background-image: url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=82"); }
+
+    .caption {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 16px 0 0;
+    }
+
+    .cred-strip {
+      background: var(--forest);
+      color: var(--white);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      padding: 30px 7%;
+      gap: 0;
+    }
+
+    .cred-item {
+      border-right: 1px solid rgba(255,255,255,.24);
+      text-align: center;
+      padding: 14px 28px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-transform: uppercase;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: .06em;
+    }
+
+    .cred-item:last-child { border-right: none; }
+
+    .icon {
+      width: 45px;
+      height: 45px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: .95;
+    }
+
+    section { padding: 78px 7%; }
+
+    .section-title {
+      font-family: var(--serif);
+      color: var(--forest);
+      font-weight: 400;
+      font-size: clamp(36px, 4vw, 58px);
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    .section-lead {
+      max-width: 760px;
+      font-size: 20px;
+      color: var(--muted);
+      margin: 18px 0 0;
+    }
+
+    .rule {
+      width: 58px;
+      height: 2px;
+      background: var(--terra);
+      margin: 18px 0 34px;
+    }
+
+    .landowner {
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 28px 0 0;
+      display: grid;
+      gap: 14px;
+      color: #35443e;
+      font-size: 18px;
+    }
+
+    .check-list li {
+      position: relative;
+      padding-left: 34px;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: -2px;
+      color: var(--forest);
+      font-weight: 900;
+      font-size: 22px;
+    }
+
+    .lead-box {
+      background: var(--paper);
+      border: 1px solid rgba(18,58,49,.16);
+      box-shadow: 0 22px 70px rgba(18,58,49,.10);
+      padding: 34px;
+    }
+
+    .lead-box h3 {
+      margin: 0 0 12px;
+      font-family: var(--serif);
+      color: var(--forest);
+      font-size: 34px;
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    .lead-box p {
+      color: var(--muted);
+      margin: 0 0 22px;
+      font-size: 17px;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 13px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid rgba(18,58,49,.2);
+      background: #fff;
+      padding: 15px 16px;
+      font: inherit;
+      color: var(--ink);
+    }
+
+    textarea { min-height: 116px; resize: vertical; }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 13px;
+    }
+
+    .btn.full { width: 100%; margin-top: 8px; }
+
+    .approach {
+      background: var(--paper);
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 44px;
+    }
+
+    .approach-card {
+      background: #fff;
+      border: 1px solid rgba(18,58,49,.13);
+      padding: 28px;
+      min-height: 250px;
+      box-shadow: 0 10px 36px rgba(18,58,49,.05);
+    }
+
+    .num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      margin-bottom: 22px;
+    }
+
+    .approach-card h3 {
+      margin: 0 0 12px;
+      font-family: var(--serif);
+      color: var(--forest);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    .approach-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .wv {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 64px;
+      background:
+        linear-gradient(90deg, rgba(18,58,49,.95), rgba(18,58,49,.85)),
+        url("https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=2200&q=86");
+      background-size: cover;
+      background-position: center;
+      color: var(--white);
+    }
+
+    .wv .section-title { color: var(--white); }
+    .wv .section-lead { color: rgba(255,255,255,.82); }
+    .wv .check-list { color: rgba(255,255,255,.9); }
+    .wv .check-list li::before { color: var(--gold); }
+
+    .quote-card {
+      background: rgba(255,255,255,.11);
+      border: 1px solid rgba(255,255,255,.18);
+      padding: 38px;
+      align-self: center;
+    }
+
+    .quote-card p {
+      font-family: var(--serif);
+      font-size: 32px;
+      line-height: 1.16;
+      margin: 0;
+    }
+
+    .quote-card small {
+      display: block;
+      margin-top: 20px;
+      color: rgba(255,255,255,.75);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 900;
+    }
+
+    .partners {
+      background: var(--sage-2);
+    }
+
+    .partner-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 42px;
+    }
+
+    .partner-card {
+      background: var(--paper);
+      border: 1px solid rgba(18,58,49,.13);
+      padding: 28px;
+      min-height: 165px;
+    }
+
+    .partner-card h3 {
+      margin: 0 0 10px;
+      color: var(--forest);
+      font-family: var(--serif);
+      font-size: 27px;
+      font-weight: 400;
+    }
+
+    .partner-card p { margin: 0; color: var(--muted); }
+
+    .final-cta {
+      padding: 64px 7%;
+      background: var(--forest);
+      color: var(--white);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .final-cta h2 {
+      font-family: var(--serif);
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.05;
+      font-weight: 400;
+      margin: 0 0 10px;
+    }
+
+    .final-cta p {
+      margin: 0;
+      color: rgba(255,255,255,.82);
+      font-size: 18px;
+      max-width: 720px;
+    }
+
+    .final-cta .btn {
+      color: var(--forest);
+      background: var(--paper);
+      border-color: var(--paper);
+    }
+
+    footer {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 26px;
+      align-items: center;
+      padding: 32px 7%;
+      background: var(--paper);
+      color: #6f766f;
+      font-family: var(--serif);
+      font-size: 15px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--sans);
+      color: var(--forest);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .footer-mark {
+      width: 42px;
+      height: 42px;
+      background: var(--forest);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-family: var(--serif);
+      font-size: 20px;
+      flex: 0 0 auto;
+    }
+
+    .small { font-size: 12px; color: #8a8d86; font-family: var(--serif); font-weight: 400; }
+
+    @media (max-width: 1050px) {
+      .nav { display: none; }
+      .topbar { padding: 16px 22px; }
+      .hero { padding: 120px 22px 58px; min-height: auto; }
+      .hero-grid,
+      .landowner,
+      .wv,
+      .final-cta,
+      footer { grid-template-columns: 1fr; }
+      .hero-grid { gap: 38px; }
+      .build-card { padding: 18px; }
+      .progression { grid-template-columns: 1fr; }
+      .progress-panel { min-height: 210px; }
+      .cred-strip,
+      .approach-grid,
+      .partner-grid { grid-template-columns: 1fr; }
+      .cred-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.22); }
+      .cred-item:last-child { border-bottom: none; }
+      section { padding: 56px 22px; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a href="#" class="brand" aria-label="Appalachia Infra home">
+      <span class="brand-mark">A/I</span>
+      <span>appalachia·infra</span>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#landowners">Landowners</a>
+      <a href="#approach">Our Approach</a>
+      <a href="#west-virginia">West Virginia</a>
+      <a href="#partners">Partners</a>
+      <a href="#contact" class="nav-button">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">West Virginia first. Infrastructure ready.</div>
+          <h1>Could your land power what comes next?</h1>
+          <p class="hero-sub">
+            Appalachia Infra evaluates large West Virginia properties for power, fiber, access, terrain, and hyperscale development readiness — then helps position the right sites for serious infrastructure partners.
+          </p>
+          <div class="hero-proof">
+            <span class="pill">Land</span>
+            <span class="pill">Power</span>
+            <span class="pill">Fiber</span>
+            <span class="pill">Site Readiness</span>
+          </div>
+          <div class="button-row">
+            <a href="#landowners" class="btn primary">Review My Property</a>
+            <a href="#approach" class="btn">See How It Works</a>
+          </div>
+        </div>
+
+        <aside class="build-card" aria-label="Site development progression">
+          <h2>From raw ground to power-ready infrastructure.</h2>
+          <div class="progression">
+            <div class="progress-panel raw"><span>1. Land with potential</span></div>
+            <div class="progress-panel ready"><span>2. Evaluated and aligned</span></div>
+            <div class="progress-panel campus"><span>3. Ready for scale</span></div>
+          </div>
+          <p class="caption">We are not looking for every property. We are looking for the right properties — land with a credible path to power, fiber, access, and phased development.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="cred-strip" aria-label="Site criteria overview">
+      <div class="cred-item">
+        <svg class="icon" viewBox="0 0 64 64"><path d="M8 44l18-24 12 14 8-9 10 19z"/><path d="M8 44h48"/></svg>
+        <span>Large Acreage</span>
+      </div>
+      <div class="cred-item">
+        <svg class="icon" viewBox="0 0 64 64"><path d="M32 6v52"/><path d="M20 20h24"/><path d="M14 32h36"/><path d="M24 58l8-52 8 52"/><path d="M18 44h28"/></svg>
+        <span>Transmission Proximity</span>
+      </div>
+      <div class="cred-item">
+        <svg class="icon" viewBox="0 0 64 64"><path d="M10 20h28"/><path d="M10 32h34"/><path d="M10 44h26"/><path d="M38 20l10-8h8"/><path d="M44 32h12"/><path d="M36 44l12 8h8"/></svg>
+        <span>Fiber Pathways</span>
+      </div>
+      <div class="cred-item">
+        <svg class="icon" viewBox="0 0 64 64"><path d="M12 52h40"/><path d="M18 52V26h10v26"/><path d="M36 52V18h10v34"/><path d="M12 26l20-14 20 14"/></svg>
+        <span>Economic Development</span>
+      </div>
+      <div class="cred-item">
+        <svg class="icon" viewBox="0 0 64 64"><rect x="14" y="12" width="36" height="9"/><rect x="14" y="28" width="36" height="9"/><rect x="14" y="44" width="36" height="9"/><path d="M20 16h4M20 32h4M20 48h4"/></svg>
+        <span>AI & Hyperscale</span>
+      </div>
+    </section>
+
+    <section class="landowner" id="landowners">
+      <div>
+        <h2 class="section-title">For West Virginia landowners.</h2>
+        <div class="rule"></div>
+        <p class="section-lead">
+          If you own or control a large tract of land, you may have a site worth evaluating. We look at practical development factors before anyone wastes time chasing a property that will not work.
+        </p>
+        <ul class="check-list">
+          <li>Large contiguous acreage, generally 100–1,000+ acres</li>
+          <li>Reasonable terrain, access, and constructability</li>
+          <li>Proximity to transmission, substations, or scalable utility paths</li>
+          <li>Fiber route potential and carrier access</li>
+          <li>Known mining, title, environmental, or surface-use issues</li>
+        </ul>
+      </div>
+
+      <div class="lead-box" id="contact">
+        <h3>Want a straight read on your property?</h3>
+        <p>Send the basics. We will review the location, acreage, infrastructure proximity, and development profile. If it looks interesting, we will contact you directly.</p>
+        <form class="form-grid" action="mailto:info@appinfra.ai" method="post" enctype="text/plain">
+          <input type="text" name="name" placeholder="Name" />
+          <input type="email" name="email" placeholder="Email" />
+          <input type="tel" name="phone" placeholder="Phone" />
+          <input type="text" name="property_location" placeholder="Property location / county" />
+          <select name="acreage">
+            <option value="">Approximate acreage</option>
+            <option>Under 100 acres</option>
+            <option>100–500 acres</option>
+            <option>500–1,000 acres</option>
+            <option>1,000+ acres</option>
+            <option>Not sure</option>
+          </select>
+          <textarea name="notes" placeholder="Anything useful: access roads, utilities, mining history, ownership, maps, or parcel information"></textarea>
+          <button class="btn primary full" type="submit">Submit Property</button>
+        </form>
+        <div class="form-note">Submission does not create an obligation, listing agreement, appraisal, or valuation. Appalachia Infra reviews potential infrastructure readiness only.</div>
+      </div>
+    </section>
+
+    <section class="approach" id="approach">
+      <h2 class="section-title">How we evaluate a site.</h2>
+      <div class="rule"></div>
+      <p class="section-lead">Our process starts with desktop screening, then moves to utility coordination and site-level diligence only when the property earns a closer look.</p>
+
+      <div class="approach-grid">
+        <div class="approach-card">
+          <div class="num">1</div>
+          <h3>Screen</h3>
+          <p>We evaluate parcel size, terrain, access, mining history, and proximity to power and fiber corridors.</p>
+        </div>
+        <div class="approach-card">
+          <div class="num">2</div>
+          <h3>Validate</h3>
+          <p>We look for practical utility pathways, transmission adjacency, scalable load potential, and obvious fatal flaws.</p>
+        </div>
+        <div class="approach-card">
+          <div class="num">3</div>
+          <h3>Structure</h3>
+          <p>For viable sites, we work toward land control, access, utility discussions, and a development path that makes sense.</p>
+        </div>
+        <div class="approach-card">
+          <div class="num">4</div>
+          <h3>Advance</h3>
+          <p>Qualified opportunities can be positioned for infrastructure partners, hyperscale users, capital, and phased deployment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wv" id="west-virginia">
+      <div>
+        <h2 class="section-title">A West Virginia-first infrastructure platform.</h2>
+        <div class="rule"></div>
+        <p class="section-lead">West Virginia has the land, energy history, workforce, and strategic location to compete for the next wave of AI infrastructure. Our role is to help connect the right properties with the right infrastructure path.</p>
+        <ul class="check-list">
+          <li>West Virginia vendors and professionals first, where execution allows</li>
+          <li>Economic development as the compass, not a slogan</li>
+          <li>Infrastructure that supports landowners, communities, utilities, and long-term users</li>
+        </ul>
+      </div>
+      <div class="quote-card">
+        <p>We are not here to chase random dirt. We are here to help identify the land that can carry West Virginia into its next industrial chapter.</p>
+        <small>Land. Power. Fiber. Readiness.</small>
+      </div>
+    </section>
+
+    <section class="partners" id="partners">
+      <h2 class="section-title">Built for serious infrastructure conversations.</h2>
+      <div class="rule"></div>
+      <p class="section-lead">The right site is not just land. It is a combination of control, power, fiber, access, timing, and development credibility.</p>
+
+      <div class="partner-grid">
+        <div class="partner-card">
+          <h3>Landowners</h3>
+          <p>Clear, direct review of whether a property has realistic hyperscale potential.</p>
+        </div>
+        <div class="partner-card">
+          <h3>Utilities</h3>
+          <p>Early coordination around transmission, load pathways, interconnection, and phased demand.</p>
+        </div>
+        <div class="partner-card">
+          <h3>Communities</h3>
+          <p>Economic development alignment for projects that can create long-term infrastructure value.</p>
+        </div>
+        <div class="partner-card">
+          <h3>Capital</h3>
+          <p>Screened opportunities with a more disciplined site-readiness story.</p>
+        </div>
+        <div class="partner-card">
+          <h3>Hyperscale Users</h3>
+          <p>Properties evaluated around power, fiber, land control, and deployability.</p>
+        </div>
+        <div class="partner-card">
+          <h3>Energy Partners</h3>
+          <p>Grid-first strategies with optional backup or supplemental power pathways where appropriate.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div>
+        <h2>Have a site worth looking at?</h2>
+        <p>Send the basics and we’ll tell you whether it belongs in the conversation.</p>
+      </div>
+      <a href="#landowners" class="btn">Review My Property</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <span class="footer-mark">A/I</span>
+      <div>
+        appalachia·infra<br>
+        <span class="small">Appalachia Infra LLC</span>
+      </div>
+    </div>
+    <div>Charleston, West Virginia</div>
+    <div><a href="mailto:info@appinfra.ai">info@appinfra.ai</a></div>
+    <div>© 2026 Appalachia Infra LLC</div>
+  </footer>
+</body>
+</html>

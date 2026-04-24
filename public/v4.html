@@ -53,39 +53,72 @@
 
     a { color: inherit; text-decoration: none; }
 
+    :focus { outline: none; }
+
+    :focus-visible {
+      outline: 2px solid var(--terra);
+      outline-offset: 3px;
+      border-radius: 1px;
+    }
+
+    .btn:focus-visible,
+    .nav-toggle:focus-visible {
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 12px 18px;
+      background: var(--terra);
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: var(--label);
+      transform: translateY(-100%);
+      transition: transform .15s ease;
+      z-index: 10;
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     .hero {
-      min-height: 760px;
+      min-height: 720px;
       color: var(--white);
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(90deg, rgba(10, 34, 28, .92) 0%, rgba(10, 34, 28, .70) 39%, rgba(10, 34, 28, .26) 72%, rgba(10, 34, 28, .08) 100%),
+        linear-gradient(90deg, rgba(10, 34, 28, .92) 0%, rgba(10, 34, 28, .72) 42%, rgba(10, 34, 28, .34) 78%, rgba(10, 34, 28, .12) 100%),
         url("./assets/images/mountain-landscape.jpg");
       background-size: cover;
       background-position: center;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 78% 22%, rgba(255, 197, 115, .28), transparent 24%),
-        linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.18));
-      pointer-events: none;
-    }
-
-    .nav, .hero-copy {
-      position: relative;
-      z-index: 2;
-    }
-
     .nav {
+      position: relative;
+      z-index: 3;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 34px 54px 0;
       gap: 30px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
     }
 
     .brand {
@@ -108,7 +141,37 @@
       font-weight: 600;
       letter-spacing: 0;
       background: rgba(16, 55, 45, .62);
-      box-shadow: 0 8px 28px rgba(0,0,0,.18);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.4);
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      cursor: pointer;
+      position: relative;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: var(--white);
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(5.5px) rotate(45deg);
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-5.5px) rotate(-45deg);
     }
 
     .nav-links {
@@ -122,13 +185,24 @@
       letter-spacing: var(--label);
     }
 
-    .nav-links a { opacity: .94; }
+    .nav-links a {
+      opacity: .92;
+      transition: opacity .15s ease;
+    }
+
+    .nav-links a:hover { opacity: 1; }
 
     .nav-links .contact {
-      background: var(--green-900);
-      padding: 14px 26px;
-      border: 1px solid rgba(255,255,255,.32);
+      background: transparent;
+      padding: 12px 22px;
+      border: 1px solid rgba(255,255,255,.55);
       font-weight: 600;
+      transition: background-color .15s ease, border-color .15s ease;
+    }
+
+    .nav-links .contact:hover {
+      background: rgba(255,255,255,.08);
+      border-color: var(--white);
     }
 
     .hero-copy {
@@ -138,12 +212,11 @@
 
     h1 {
       font-family: var(--sans);
-      font-size: clamp(2.75rem, 5.6vw, 4.75rem);
-      line-height: 1;
+      font-size: clamp(2.875rem, 7vw, 6rem);
+      line-height: 1.06;
       font-weight: 700;
-      letter-spacing: var(--tightest);
-      margin: 0 0 1.5rem;
-      text-shadow: 0 2px 20px rgba(0,0,0,.24);
+      letter-spacing: -0.054em;
+      margin: 0 0 1.75rem;
     }
 
     .hero-sub {
@@ -152,22 +225,8 @@
       font-weight: 400;
       line-height: 1.5;
       letter-spacing: -0.005em;
-      margin: 0;
+      margin: 0 0 2.5rem;
       color: rgba(255,255,255,.92);
-      text-shadow: 0 2px 12px rgba(0,0,0,.18);
-    }
-
-    .hero-proof {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 22px;
-      margin: 28px 0 36px;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: var(--label);
-      text-transform: uppercase;
-      color: rgba(255,255,255,.85);
     }
 
     .button-row {
@@ -181,34 +240,30 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 18px 28px;
+      padding: 20px 30px;
       font-family: var(--mono);
       text-transform: uppercase;
       font-size: 0.8125rem;
       font-weight: 600;
       letter-spacing: 0.06em;
       border: 1px solid rgba(255,255,255,.78);
-      transition: .2s ease;
+      transition: background-color .2s ease, border-color .2s ease;
     }
 
     .btn.filled {
-      background: rgba(22, 63, 52, .84);
-    }
-
-    .btn:hover {
       background: var(--terra);
-      transform: translateY(-1px);
+      border-color: var(--terra);
+      color: var(--white);
     }
 
-    .hero-diagram {
-      position: absolute;
-      right: 5%;
-      bottom: 140px;
-      z-index: 1;
-      width: min(38vw, 620px);
-      opacity: .44;
-      filter: drop-shadow(0 12px 25px rgba(0,0,0,.3));
-      pointer-events: none;
+    .btn.filled:hover {
+      background: #b25739;
+      border-color: #b25739;
+    }
+
+    .btn:not(.filled):hover {
+      background: rgba(255,255,255,.08);
+      border-color: var(--white);
     }
 
     .cred-strip {
@@ -216,29 +271,50 @@
       color: var(--white);
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      padding: 36px 7.5%;
+      padding: 44px 6%;
+      border-top: 3px solid var(--terra);
     }
 
     .cred-item {
-      min-height: 132px;
+      min-height: 124px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      gap: 14px;
-      padding: 0 30px;
-      border-right: 1px solid rgba(255,255,255,.22);
-      font-family: var(--mono);
-      text-transform: uppercase;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      letter-spacing: var(--label);
-      line-height: 1.45;
-      color: rgba(255,255,255,.92);
+      justify-content: flex-start;
+      align-items: flex-start;
+      text-align: left;
+      gap: 12px;
+      padding: 0 28px;
+      border-right: 1px solid rgba(255,255,255,.16);
     }
 
     .cred-item:last-child { border-right: none; }
+
+    .cred-item .icon {
+      width: 24px;
+      height: 24px;
+      color: var(--terra);
+      stroke-width: 2;
+      opacity: .9;
+    }
+
+    .cred-stat {
+      font-family: var(--mono);
+      font-size: clamp(1.375rem, 1.85vw, 1.625rem);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.05;
+      color: var(--white);
+    }
+
+    .cred-label {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: var(--label);
+      color: rgba(255,255,255,.62);
+      margin-top: auto;
+    }
 
     .icon {
       width: 56px;
@@ -267,10 +343,10 @@
     }
 
     .title-rule {
-      width: 66px;
-      height: 2px;
+      width: 72px;
+      height: 3px;
       background: var(--terra);
-      margin: 14px auto 48px;
+      margin: 18px auto 56px;
     }
 
     .platform {
@@ -332,25 +408,23 @@
       grid-template-columns: .95fr 1.05fr;
       gap: 72px;
       align-items: center;
-      padding-top: 64px;
-      padding-bottom: 64px;
     }
 
     .site-proof h2 {
       font-family: var(--sans);
       color: var(--green-900);
       font-weight: 600;
-      font-size: clamp(1.625rem, 2.6vw, 2rem);
+      font-size: clamp(1.5rem, 2.4vw, 1.875rem);
       letter-spacing: var(--tighter);
       line-height: 1.15;
       margin: 0;
     }
 
     .small-rule {
-      width: 46px;
-      height: 2px;
+      width: 56px;
+      height: 3px;
       background: var(--terra);
-      margin: 11px 0 24px;
+      margin: 14px 0 28px;
     }
 
     .checks {
@@ -366,30 +440,29 @@
     }
 
     .checks li {
-      position: relative;
-      padding-left: 30px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
       margin: 14px 0;
     }
 
     .checks li:before {
       content: "";
-      position: absolute;
-      left: 0;
-      top: 0.45em;
+      display: inline-block;
+      flex-shrink: 0;
       width: 14px;
       height: 1.5px;
       background: var(--terra);
+      transform: translateY(-0.35em);
     }
 
     .wide-image {
       min-height: 330px;
-      border: 1px solid rgba(20, 60, 49, .12);
       background:
-        linear-gradient(90deg, rgba(20, 60, 49, .65), rgba(20, 60, 49, .08)),
+        linear-gradient(90deg, rgba(20, 60, 49, .68), rgba(20, 60, 49, .08)),
         url("./assets/images/forest-ridge.jpg");
       background-size: cover;
       background-position: center;
-      box-shadow: 0 18px 50px rgba(16, 55, 45, .10);
       position: relative;
       overflow: hidden;
     }
@@ -415,8 +488,6 @@
       grid-template-columns: .78fr 1.22fr;
       gap: 76px;
       align-items: start;
-      padding-top: 58px;
-      padding-bottom: 58px;
     }
 
     .why-process h2 {
@@ -430,58 +501,42 @@
     }
 
     .process {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 38px;
-      margin-top: 28px;
-      text-align: center;
+      margin-top: 32px;
+      border-top: 2px solid var(--terra);
     }
 
-    .step { position: relative; }
-
-    .step:not(:last-child)::after {
-      content: "";
-      width: 62px;
-      height: 1.5px;
-      background: var(--green-900);
-      position: absolute;
-      top: 24px;
-      right: -50px;
+    .step {
+      display: flex;
+      align-items: baseline;
+      gap: 28px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
     }
 
-    .step:not(:last-child)::before {
-      content: "›";
-      position: absolute;
-      top: 7px;
-      right: -55px;
-      color: var(--green-900);
-      font-size: 34px;
-      line-height: 1;
-    }
+    .step:last-child { border-bottom: none; }
 
     .num {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--green-900);
-      color: var(--white);
-      display: grid;
-      place-items: center;
-      margin: 0 auto 16px;
       font-family: var(--mono);
+      font-size: 2.25rem;
       font-weight: 600;
-      font-size: 1rem;
-      letter-spacing: 0;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--green-900);
+      flex: 0 0 auto;
+      min-width: 64px;
     }
 
     .step-label {
       font-family: var(--sans);
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
       font-weight: 500;
-      letter-spacing: -0.005em;
-      color: #293933;
-      line-height: 1.3;
+      letter-spacing: var(--label);
+      text-transform: uppercase;
+      color: #5a6862;
+      line-height: 1.35;
+      flex: 1;
     }
+
 
     .profile-partners {
       display: grid;
@@ -534,17 +589,14 @@
     .profile-list li {
       display: flex;
       align-items: center;
-      gap: 17px;
-      margin: 13px 0;
+      gap: 16px;
+      margin: 14px 0;
     }
 
-    .mini-icon {
-      width: 26px;
-      height: 26px;
-      border: 1px solid rgba(255,255,255,.65);
-      display: grid;
-      place-items: center;
-      font-size: 13px;
+    .profile-list .icon {
+      width: 28px;
+      height: 28px;
+      stroke: rgba(255,255,255,.78);
       flex: 0 0 auto;
     }
 
@@ -575,53 +627,55 @@
 
     .cta {
       background:
-        linear-gradient(rgba(31, 76, 65, .96), rgba(31, 76, 65, .96)),
+        linear-gradient(rgba(16, 55, 45, .94), rgba(16, 55, 45, .94)),
         url("./assets/images/mountain-landscape.jpg");
       background-size: cover;
       background-position: center;
       color: var(--white);
-      padding: 42px 10% 50px;
+      padding: 72px 8% 76px;
+      border-top: 3px solid var(--terra);
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      align-items: center;
-      gap: 54px;
+      grid-template-columns: 1.15fr 1fr;
+      align-items: end;
+      gap: 56px;
     }
 
     .cta h2 {
       font-family: var(--sans);
-      font-size: clamp(1.875rem, 3.2vw, 2.5rem);
-      font-weight: 600;
-      letter-spacing: var(--tightest);
-      line-height: 1.1;
-      text-align: center;
-      margin: 0 0 6px;
+      font-size: clamp(2.25rem, 4.2vw, 3.25rem);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1;
+      text-align: left;
+      margin: 0 0 1.25rem;
       grid-column: 1 / -1;
-    }
-
-    .cta .title-rule {
-      grid-column: 1 / -1;
-      margin-bottom: 0;
+      max-width: 22ch;
     }
 
     .cta p {
-      max-width: 42rem;
+      max-width: 36rem;
       font-family: var(--sans);
       font-size: 1.0625rem;
       font-weight: 400;
       line-height: 1.55;
       letter-spacing: -0.005em;
       margin: 0;
-      color: rgba(255,255,255,.92);
+      color: rgba(255,255,255,.86);
     }
 
-    .cta .button-row { justify-content: flex-start; }
+    .cta .button-row { justify-content: flex-end; }
 
-    .cta .btn { min-width: 230px; }
+    .cta .btn { min-width: 240px; }
 
     .cta .btn.light {
-      background: var(--paper);
-      color: var(--green-900);
-      border-color: var(--paper);
+      background: var(--terra);
+      color: var(--white);
+      border-color: var(--terra);
+    }
+
+    .cta .btn.light:hover {
+      background: #b25739;
+      border-color: #b25739;
     }
 
     footer {
@@ -629,14 +683,21 @@
       grid-template-columns: 1.45fr 1fr 1fr 1fr;
       gap: 28px;
       align-items: center;
-      padding: 34px 8%;
+      padding: 36px 8%;
       background: var(--paper);
       color: #645f58;
       font-family: var(--sans);
       font-size: 0.875rem;
       font-weight: 400;
       letter-spacing: -0.005em;
+      border-top: 1px solid var(--line);
     }
+
+    footer a {
+      transition: color .15s ease;
+    }
+
+    footer a:hover { color: var(--green-900); }
 
     .footer-brand {
       display: flex;
@@ -681,10 +742,40 @@
       }
 
       .nav {
-        padding: 24px 24px 0;
+        padding: 24px;
       }
 
-      .nav-links { display: none; }
+      .nav-toggle { display: inline-flex; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: rgba(10, 34, 28, .96);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 8px 24px 20px;
+        border-top: 1px solid rgba(255,255,255,.12);
+      }
+
+      .nav-links.is-open { display: flex; }
+
+      .nav-links a {
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+      }
+
+      .nav-links .contact {
+        margin-top: 12px;
+        padding: 14px 18px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,.55);
+      }
 
       .brand { font-size: 1.25rem; }
 
@@ -697,8 +788,6 @@
       .hero-copy {
         padding: 92px 24px 58px;
       }
-
-      .hero-diagram { display: none; }
 
       .cred-strip,
       .three-col,
@@ -713,8 +802,38 @@
       .cred-strip { padding: 0; }
 
       .cred-item {
+        min-height: auto;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 32px 1fr;
+        column-gap: 16px;
+        row-gap: 4px;
+        align-items: center;
         border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,.24);
+        border-bottom: 1px solid rgba(255,255,255,.16);
+      }
+
+      .cred-item:last-child { border-bottom: none; }
+
+      .cred-item .icon {
+        width: 32px;
+        height: 32px;
+        grid-column: 1;
+        grid-row: 1 / 3;
+        align-self: center;
+      }
+
+      .cred-stat {
+        grid-column: 2;
+        grid-row: 1;
+        font-size: 1.5rem;
+      }
+
+      .cred-label {
+        grid-column: 2;
+        grid-row: 2;
+        margin-top: 0;
+        padding-left: 0;
       }
 
       .platform-card {
@@ -730,22 +849,20 @@
         gap: 44px;
       }
 
-      .process {
-        grid-template-columns: 1fr;
-        gap: 31px;
-      }
+      .step { gap: 20px; }
 
-      .step:not(:last-child)::after,
-      .step:not(:last-child)::before {
-        display: none;
+      .num {
+        font-size: 1.875rem;
+        min-width: 56px;
       }
 
       .partner-grid { grid-template-columns: 1fr; }
 
-      .cta h2,
-      .cta .title-rule {
-        grid-column: auto;
+      .cta {
+        padding: 56px 24px 60px;
       }
+
+      .cta h2 { grid-column: auto; }
 
       .cta .button-row { justify-content: flex-start; }
 
@@ -758,6 +875,8 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="hero">
     <nav class="nav">
       <a href="#" class="brand">
@@ -765,72 +884,65 @@
         <span>appalachia·infra</span>
       </a>
 
-      <div class="nav-links">
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-links" id="primary-nav">
         <a href="#about">About</a>
-        <a href="#approach">Our Approach</a>
+        <a href="#approach">Our approach</a>
         <a href="#opportunities">Opportunities</a>
         <a href="#partners">Partners</a>
         <a href="#contact" class="contact">Contact</a>
       </div>
     </nav>
 
-    <svg class="hero-diagram" viewBox="0 0 720 360" aria-hidden="true">
-      <g stroke="#fff" stroke-width="2" fill="none" opacity=".65">
-        <path d="M80 255 C180 190, 240 180, 330 220 S520 260, 650 150" />
-        <path d="M90 280 C210 205, 285 205, 390 248 S560 285, 665 185" />
-        <path d="M500 95 L540 260 L455 260 Z" />
-        <path d="M478 145 H524 M466 188 H534 M456 230 H545" />
-        <path d="M170 120 H270 M170 150 H270 M170 180 H270" />
-        <path d="M170 120 L135 95 M270 120 L310 95" />
-        <path d="M350 205 h80 v40 h-80z" />
-        <path d="M365 205 v-28 M390 205 v-42 M415 205 v-30" />
-      </g>
-    </svg>
-
     <div class="hero-copy">
-      <h1>Land, Power, and Fiber for Next-Generation Compute.</h1>
+      <h1>Land, power, and fiber for hyperscale and AI compute.</h1>
       <p class="hero-sub">
-        Appalachia Infra develops large-scale, power-ready sites across West Virginia for hyperscale and AI infrastructure.
+        Appalachia Infra develops 100–1,000-acre sites in West Virginia &mdash; pre-screened for transmission access, fiber routes, and a credible path to 50MW–500MW+ interconnect.
       </p>
 
-      <div class="hero-proof">
-        <span>Site Control.</span>
-        <span>Power Access.</span>
-        <span>Speed to Deployment.</span>
-      </div>
-
       <div class="button-row">
-        <a href="#opportunities" class="btn filled">Review Opportunities</a>
-        <a href="#contact" class="btn">Contact Us</a>
+        <a href="#opportunities" class="btn filled">See current sites</a>
+        <a href="#contact" class="btn">Talk to development</a>
       </div>
     </div>
   </header>
 
-  <section class="cred-strip" aria-label="Platform overview">
+  <main id="main">
+  <section class="cred-strip" aria-label="Site capabilities">
     <div class="cred-item">
-      <svg class="icon" viewBox="0 0 64 64"><path d="M8 42c10-12 16-22 24-22s14 10 24 22"/><path d="M12 42h40"/><path d="M22 34l10-10 10 10"/></svg>
-      <span>100–1,000+<br>Acre Sites</span>
+      <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 42c10-12 16-22 24-22s14 10 24 22"/><path d="M12 42h40"/><path d="M22 34l10-10 10 10"/></svg>
+      <span class="cred-stat">100–1,000+</span>
+      <span class="cred-label">Acres, contiguous</span>
     </div>
     <div class="cred-item">
-      <svg class="icon" viewBox="0 0 64 64"><path d="M32 6v52"/><path d="M20 20h24"/><path d="M14 32h36"/><path d="M24 58l8-52 8 52"/><path d="M18 44h28"/></svg>
-      <span>Transmission<br>Access</span>
+      <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6v52"/><path d="M20 20h24"/><path d="M14 32h36"/><path d="M24 58l8-52 8 52"/><path d="M18 44h28"/></svg>
+      <span class="cred-stat">Transmission</span>
+      <span class="cred-label">High-voltage adjacent</span>
     </div>
     <div class="cred-item">
-      <svg class="icon" viewBox="0 0 64 64"><path d="M8 20h30"/><path d="M8 32h38"/><path d="M8 44h30"/><path d="M38 20l8-8h10"/><path d="M46 32h10"/><path d="M38 44l8 8h10"/></svg>
-      <span>Fiber<br>Proximity</span>
+      <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 20h30"/><path d="M8 32h38"/><path d="M8 44h30"/><path d="M38 20l8-8h10"/><path d="M46 32h10"/><path d="M38 44l8 8h10"/></svg>
+      <span class="cred-stat">Fiber</span>
+      <span class="cred-label">Long-haul routes</span>
     </div>
     <div class="cred-item">
-      <svg class="icon" viewBox="0 0 64 64"><path d="M28 8l4 8 8 2-4 8 6 8-8 4 2 10-10-2-8 6-2-10-8-4 6-8-4-8 10-2z"/></svg>
-      <span>West Virginia<br>Focus</span>
+      <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M28 8l4 8 8 2-4 8 6 8-8 4 2 10-10-2-8 6-2-10-8-4 6-8-4-8 10-2z"/></svg>
+      <span class="cred-stat">Statewide</span>
+      <span class="cred-label">West Virginia</span>
     </div>
     <div class="cred-item">
-      <svg class="icon" viewBox="0 0 64 64"><rect x="14" y="12" width="36" height="9"/><rect x="14" y="28" width="36" height="9"/><rect x="14" y="44" width="36" height="9"/><path d="M20 16h4M20 32h4M20 48h4"/></svg>
-      <span>Built for<br>AI & Hyperscale</span>
+      <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><rect x="14" y="12" width="36" height="9"/><rect x="14" y="28" width="36" height="9"/><rect x="14" y="44" width="36" height="9"/><path d="M20 16h4M20 32h4M20 48h4"/></svg>
+      <span class="cred-stat">50–500MW+</span>
+      <span class="cred-label">Capacity targets</span>
     </div>
   </section>
 
   <section class="platform" id="about">
-    <h2 class="section-title">A Platform Built for Deployment</h2>
+    <h2 class="section-title">Land. Power. Fiber.</h2>
     <div class="title-rule"></div>
 
     <div class="three-col">
@@ -839,7 +951,7 @@
           <svg class="icon" viewBox="0 0 64 64"><path d="M8 44l18-24 12 14 8-9 10 19z"/><path d="M8 44h48"/></svg>
         </div>
         <h3>Land</h3>
-        <p>Strategic site selection<br>Large acreage control<br>Industrial and energy-adjacent parcels</p>
+        <p>100–1,000+ acres under control or option, in industrially zoned and energy-adjacent parcels.</p>
       </div>
 
       <div class="platform-card">
@@ -847,7 +959,7 @@
           <svg class="icon" viewBox="0 0 64 64"><path d="M32 6v52"/><path d="M20 20h24"/><path d="M14 32h36"/><path d="M24 58l8-52 8 52"/><path d="M18 44h28"/></svg>
         </div>
         <h3>Power</h3>
-        <p>Transmission proximity<br>Utility coordination<br>Scalable load pathways</p>
+        <p>Transmission-adjacent positions with active utility coordination. Capacity targets from 50MW to 500MW+.</p>
       </div>
 
       <div class="platform-card">
@@ -855,21 +967,21 @@
           <svg class="icon" viewBox="0 0 64 64"><path d="M10 20h28"/><path d="M10 32h34"/><path d="M10 44h26"/><path d="M38 20l10-8h8"/><path d="M44 32h12"/><path d="M36 44l12 8h8"/></svg>
         </div>
         <h3>Fiber</h3>
-        <p>Backbone access<br>Routing feasibility<br>Carrier alignment</p>
+        <p>Long-haul backbone within reach. Route feasibility studied; carrier conversations underway.</p>
       </div>
     </div>
   </section>
 
   <section class="site-proof">
     <div>
-      <h2>Infrastructure-First Site Development</h2>
+      <h2>How we screen sites</h2>
       <div class="small-rule"></div>
       <ul class="checks">
-        <li>Large land positions with expansion potential</li>
-        <li>Power proximity screened before presentation</li>
-        <li>Fiber and carrier routing evaluated early</li>
-        <li>Designed for phased hyperscale deployment</li>
-        <li>Focused on speed-to-power and execution readiness</li>
+        <li>Acreage under control or option, with documented expansion paths</li>
+        <li>Power and transmission diligence completed before any site is shown</li>
+        <li>Fiber routes and carrier coverage mapped during pre-screening</li>
+        <li>Sized for phased build-out from 50MW first phase to 500MW+ at maturity</li>
+        <li>Permitting and interconnect paths pressure-tested before presentation</li>
       </ul>
     </div>
     <div class="wide-image"></div>
@@ -880,34 +992,34 @@
       <h2>Why West Virginia</h2>
       <div class="small-rule"></div>
       <ul class="checks">
-        <li>Low-cost, abundant energy</li>
-        <li>Available transmission corridors</li>
-        <li>Large contiguous land availability</li>
-        <li>Favorable regulatory environment</li>
-        <li>Proximity to East Coast demand</li>
+        <li>Industrial power rates among the lowest in the Mid-Atlantic</li>
+        <li>Existing high-voltage transmission with available capacity</li>
+        <li>Contiguous parcels above 1,000 acres still assemblable</li>
+        <li>Predictable state and county permitting pathways</li>
+        <li>Within ~400 miles of the Northern Virginia data center cluster</li>
       </ul>
     </div>
 
     <div>
-      <h2>From Land to Power-Ready Sites</h2>
+      <h2>From land to ready site</h2>
       <div class="small-rule"></div>
 
       <div class="process">
         <div class="step">
-          <div class="num">1</div>
-          <div class="step-label">Site<br>Identification</div>
+          <div class="num">01</div>
+          <div class="step-label">Site identification</div>
         </div>
         <div class="step">
-          <div class="num">2</div>
-          <div class="step-label">Land<br>Control</div>
+          <div class="num">02</div>
+          <div class="step-label">Land control</div>
         </div>
         <div class="step">
-          <div class="num">3</div>
-          <div class="step-label">Infrastructure<br>Alignment</div>
+          <div class="num">03</div>
+          <div class="step-label">Power &amp; fiber alignment</div>
         </div>
         <div class="step">
-          <div class="num">4</div>
-          <div class="step-label">Entitlement &<br>Readiness</div>
+          <div class="num">04</div>
+          <div class="step-label">Entitlement to ready</div>
         </div>
       </div>
     </div>
@@ -915,56 +1027,71 @@
 
   <section class="profile-partners" id="opportunities">
     <div class="profile">
-      <h2>Target Development Profile</h2>
+      <h2>Site profile</h2>
       <div class="small-rule"></div>
 
       <ul class="profile-list">
-        <li><span class="mini-icon">△</span>100–1,000+ acre sites</li>
-        <li><span class="mini-icon">◉</span>50MW – 500MW+ capacity potential</li>
-        <li><span class="mini-icon">⌁</span>Transmission-accessible locations</li>
-        <li><span class="mini-icon">⇄</span>Fiber-accessible corridors</li>
-        <li><span class="mini-icon">▦</span>Phased deployment capability</li>
+        <li>
+          <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 42c10-12 16-22 24-22s14 10 24 22"/><path d="M12 42h40"/><path d="M22 34l10-10 10 10"/></svg>
+          100–1,000+ acres, contiguous
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><rect x="14" y="12" width="36" height="9"/><rect x="14" y="28" width="36" height="9"/><rect x="14" y="44" width="36" height="9"/><path d="M20 16h4M20 32h4M20 48h4"/></svg>
+          50MW first phase to 500MW+ at full build
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6v52"/><path d="M20 20h24"/><path d="M14 32h36"/><path d="M24 58l8-52 8 52"/><path d="M18 44h28"/></svg>
+          Adjacent to existing high-voltage transmission
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 20h30"/><path d="M8 32h38"/><path d="M8 44h30"/><path d="M38 20l8-8h10"/><path d="M46 32h10"/><path d="M38 44l8 8h10"/></svg>
+          Within reach of long-haul fiber
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="44" width="10" height="14"/><rect x="20" y="34" width="10" height="24"/><rect x="34" y="22" width="10" height="36"/><rect x="48" y="10" width="10" height="48"/></svg>
+          Phaseable from initial campus to full scale
+        </li>
       </ul>
     </div>
 
     <div class="partners" id="partners">
-      <h2>Built for Infrastructure Partners</h2>
+      <h2>Who we work with</h2>
       <div class="small-rule"></div>
 
       <div class="partner-grid">
         <div class="partner-item">
           <svg class="icon" viewBox="0 0 64 64"><rect x="12" y="18" width="14" height="32"/><rect x="38" y="18" width="14" height="32"/><path d="M26 26h12M26 42h12"/></svg>
-          <span>Hyperscale Operators</span>
+          <span>Hyperscale operators</span>
         </div>
         <div class="partner-item">
           <svg class="icon" viewBox="0 0 64 64"><path d="M12 52h40"/><path d="M18 52V26h10v26"/><path d="M36 52V18h10v34"/><path d="M12 26l20-14 20 14"/></svg>
-          <span>Infrastructure Funds</span>
+          <span>Infrastructure funds</span>
         </div>
         <div class="partner-item">
           <svg class="icon" viewBox="0 0 64 64"><path d="M20 16h24v32H20z"/><path d="M14 24h6M14 40h6M44 24h6M44 40h6M28 10v6M36 10v6M28 48v6M36 48v6"/></svg>
-          <span>AI Platforms</span>
+          <span>AI compute operators</span>
         </div>
         <div class="partner-item">
           <svg class="icon" viewBox="0 0 64 64"><path d="M32 10l8 16 16 6-16 6-8 16-8-16-16-6 16-6z"/></svg>
-          <span>Strategic Capital Partners</span>
+          <span>Strategic capital</span>
         </div>
         <div class="partner-item">
           <svg class="icon" viewBox="0 0 64 64"><circle cx="32" cy="32" r="10"/><path d="M32 8v8M32 48v8M8 32h8M48 32h8M15 15l6 6M43 43l6 6M49 15l-6 6M21 43l-6 6"/></svg>
-          <span>Energy Developers</span>
+          <span>Energy developers</span>
         </div>
       </div>
     </div>
   </section>
 
   <section class="cta" id="contact">
-    <h2>Active Development & Partnership Inquiries</h2>
-    <div class="title-rule"></div>
-    <p>Appalachia Infra is actively evaluating and advancing site opportunities across West Virginia.</p>
+    <h2>Have a brief or RFI? Let's talk.</h2>
+    <p>We're actively advancing site positions across West Virginia and can share our current site book under NDA. RFIs receive a response within five business days.</p>
     <div class="button-row">
-      <a class="btn light" href="mailto:info@appinfra.ai">Request Site Overview</a>
-      <a class="btn" href="mailto:info@appinfra.ai">Contact Appalachia Infra</a>
+      <a class="btn light" href="mailto:info@appinfra.ai?subject=Site%20book%20request">Request the site book</a>
+      <a class="btn" href="mailto:info@appinfra.ai">Email development</a>
     </div>
   </section>
+  </main>
 
   <footer>
     <div class="footer-brand">
@@ -978,5 +1105,28 @@
     <div><a href="mailto:info@appinfra.ai">info@appinfra.ai</a></div>
     <div>© 2026 Appalachia Infra LLC</div>
   </footer>
+
+  <script>
+    (function () {
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('primary-nav');
+      if (!toggle || !nav) return;
+
+      toggle.addEventListener('click', function () {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        toggle.setAttribute('aria-label', open ? 'Open navigation' : 'Close navigation');
+        nav.classList.toggle('is-open');
+      });
+
+      nav.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A' && nav.classList.contains('is-open')) {
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open navigation');
+          nav.classList.remove('is-open');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

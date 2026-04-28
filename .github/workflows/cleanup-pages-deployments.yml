@@ -1,0 +1,179 @@
+name: Cleanup Cloudflare Pages Deployments
+
+# Deletes old preview AND production deployments from Cloudflare Pages.
+#
+# Hard guarantees (the workflow exits with no deletes if any of these fail):
+#   1. The current production deployment (project.canonical_deployment.id) is
+#      never deleted, full stop.
+#   2. The most recent production deployment (latest_deployment) is never
+#      deleted, in case canonical and latest disagree mid-rollout.
+#   3. Any deployment with a non-empty `aliases` array is skipped — those are
+#      the live deployments serving a branch's preview URL.
+#
+# Soft policy (configurable):
+#   - Keeps the N most recent preview deployments AND the N most recent
+#     production deployments. Older ones in either pool are deleted.
+
+on:
+  pull_request:
+    # Any PR -> dry-run preview of what would be deleted.
+  push:
+    branches: [main]
+    # Push to main -> real cleanup.
+  workflow_dispatch:
+    inputs:
+      project_name:
+        description: 'Cloudflare Pages project name'
+        required: false
+        default: 'appinfra-website'
+      keep_count:
+        description: 'Number of recent deployments to keep per environment (preview and production each)'
+        required: false
+        default: '10'
+      dry_run:
+        description: 'List what would be deleted, but do not delete'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup deployments
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          PROJECT_NAME: ${{ github.event.inputs.project_name || 'appinfra-website' }}
+          KEEP_COUNT: ${{ github.event.inputs.keep_count || '10' }}
+          # PR runs are always dry-run. Manual dispatch uses the user input.
+          # Everything else (push to main, schedule) runs for real.
+          DRY_RUN: ${{ github.event_name == 'pull_request' && 'true' || (github.event.inputs.dry_run || 'false') }}
+        run: |
+          set -euo pipefail
+
+          API_BASE="https://api.cloudflare.com/client/v4"
+          PROJECT_BASE="$API_BASE/accounts/$CF_ACCOUNT_ID/pages/projects/$PROJECT_NAME"
+          DEPLOY_URL="$PROJECT_BASE/deployments"
+          AUTH="Authorization: Bearer $CF_API_TOKEN"
+
+          # --- 1. Get the current live production deployment IDs --------------
+          # Hard guard. If we can't read the project, abort — never blind-delete.
+          echo "::group::Identifying live production deployment"
+          project_resp=$(curl -sf -H "$AUTH" "$PROJECT_BASE")
+          canonical_id=$(echo "$project_resp" | jq -r '.result.canonical_deployment.id // empty')
+          latest_id=$(echo "$project_resp" | jq -r '.result.latest_deployment.id // empty')
+
+          if [ -z "$canonical_id" ] && [ -z "$latest_id" ]; then
+            echo "Could not determine canonical or latest deployment — aborting for safety."
+            exit 1
+          fi
+
+          echo "canonical_deployment.id = ${canonical_id:-<none>}"
+          echo "latest_deployment.id    = ${latest_id:-<none>}"
+          echo "::endgroup::"
+
+          # --- 2. Fetch every deployment (paginated, 25/page) -----------------
+          echo "::group::Fetching deployments"
+          all='[]'
+          page=1
+          while :; do
+            resp=$(curl -sf -H "$AUTH" "$DEPLOY_URL?page=$page&per_page=25")
+            chunk=$(echo "$resp" | jq '.result')
+            count=$(echo "$chunk" | jq 'length')
+            [ "$count" -eq 0 ] && break
+            all=$(jq -s '.[0] + .[1]' <(echo "$all") <(echo "$chunk"))
+            page=$((page+1))
+          done
+          total=$(echo "$all" | jq 'length')
+          echo "Found $total total deployment(s)"
+          echo "::endgroup::"
+
+          # --- 3. Compute deletion candidates ---------------------------------
+          # Candidate = (preview OR production) AND not canonical AND not latest
+          # AND has empty aliases (i.e. not currently serving any branch URL).
+          # Then, per environment pool, take everything older than the
+          # KEEP_COUNT most recent.
+          to_delete=$(echo "$all" | jq -c \
+            --arg canonical "$canonical_id" \
+            --arg latest "$latest_id" \
+            --argjson keep "$KEEP_COUNT" \
+            '
+              def older_than_keep($keep):
+                sort_by(.created_on) | reverse | .[$keep:];
+
+              [ .[]
+                | select(.id != $canonical)
+                | select(.id != $latest)
+                | select((.aliases // []) | length == 0)
+              ] as $safe
+              | (
+                  ($safe | map(select(.environment == "preview"))    | older_than_keep($keep))
+                  +
+                  ($safe | map(select(.environment == "production")) | older_than_keep($keep))
+                )
+              | .[]
+              | {
+                  id,
+                  created_on,
+                  environment,
+                  branch: (.deployment_trigger.metadata.branch // "unknown")
+                }
+            ')
+
+          if [ -z "$to_delete" ]; then
+            echo "Nothing to delete."
+            exit 0
+          fi
+
+          # --- 4. Final defensive sanity check --------------------------------
+          # Belt-and-suspenders: verify none of the IDs we're about to delete
+          # are the canonical or latest production deployment.
+          while IFS= read -r row; do
+            id=$(echo "$row" | jq -r '.id')
+            if [ "$id" = "$canonical_id" ] || [ "$id" = "$latest_id" ]; then
+              echo "FATAL: deletion list contains protected deployment $id — aborting."
+              exit 1
+            fi
+          done <<< "$to_delete"
+
+          # --- 5. Delete (or dry-run) -----------------------------------------
+          echo "::group::Deleting deployments"
+          deleted=0
+          skipped=0
+          while IFS= read -r row; do
+            id=$(echo "$row" | jq -r '.id')
+            created=$(echo "$row" | jq -r '.created_on')
+            branch=$(echo "$row" | jq -r '.branch')
+            environment=$(echo "$row" | jq -r '.environment')
+            label="$id  [$environment] ($branch  $created)"
+
+            if [ "$DRY_RUN" = "true" ]; then
+              echo "[dry-run] would delete $label"
+              continue
+            fi
+
+            # ?force=true is needed for some non-aliased preview deployments,
+            # but Cloudflare still refuses to delete the live production deployment.
+            http_code=$(curl -s -o /tmp/cf-resp.json -w "%{http_code}" \
+              -X DELETE -H "$AUTH" "$DEPLOY_URL/$id?force=true" || true)
+
+            if [ "$http_code" = "200" ]; then
+              echo "deleted   $label"
+              deleted=$((deleted+1))
+            else
+              msg=$(jq -r '.errors[0].message // "unknown error"' /tmp/cf-resp.json 2>/dev/null || echo "unknown error")
+              echo "skipped   $label  ($http_code: $msg)"
+              skipped=$((skipped+1))
+            fi
+          done <<< "$to_delete"
+          echo "::endgroup::"
+
+          echo ""
+          echo "Done. deleted=$deleted skipped=$skipped"

@@ -33,7 +33,7 @@ on:
       dry_run:
         description: 'List what would be deleted, but do not delete'
         required: false
-        default: 'false'
+        default: 'true'
         type: choice
         options:
           - 'true'
@@ -43,7 +43,8 @@ permissions:
   contents: read
 
 jobs:
-  cleanup:
+  run:
+    name: Run
     runs-on: ubuntu-latest
     steps:
       - name: Cleanup deployments

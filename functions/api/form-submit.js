@@ -14,8 +14,20 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
+    if (name.length > 200) {
+      return Response.json({ ok: false, error: "Name too long" }, { status: 400 });
+    }
+
+    if (email.length > 300) {
+      return Response.json({ ok: false, error: "Email too long" }, { status: 400 });
+    }
+
     if (message.length > 3000) {
       return Response.json({ ok: false, error: "Message too long" }, { status: 400 });
+    }
+
+    if (inquiryType.length > 100) {
+      return Response.json({ ok: false, error: "Inquiry type too long" }, { status: 400 });
     }
 
     if (!isValidEmail(email)) {

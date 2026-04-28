@@ -34,10 +34,13 @@ export async function onRequestPost({ request, env }) {
       return Response.json({ ok: false, error: "Invalid email" }, { status: 400 });
     }
 
-    const lines = [`Name: ${name}`, `Email: ${email}`];
-    if (inquiryType) lines.push(`Inquiry Type: ${inquiryType}`);
-    lines.push("", message);
-    const emailBody = lines.join("\n");
+    const emailBody = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Inquiry Type: ${inquiryType}`,
+      ``,
+      message
+    ].join("\n");
 
     const sendToEmail = env.FORM_SUBMIT_TO_EMAIL || "mark@appinfra.ai";
 

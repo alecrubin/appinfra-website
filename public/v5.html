@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Appalachia Infra | West Virginia Land, Power & Fiber</title>
   <meta name="description" content="Appalachia Infra helps West Virginia landowners evaluate large acreage, power access, fiber proximity, and infrastructure readiness for AI and hyperscale development." />
+  <link rel="canonical" href="https://appinfra.ai/v5">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="Appalachia Infra — Mountains to Megawatts">
+  <meta property="og:description" content="Digital infrastructure for West Virginia. Land, power, and fiber for the next generation of hyperscale compute.">
+  <meta property="og:url" content="https://appinfra.ai/v5">
+  <meta property="og:type" content="website">
 
   <style>
     :root {
@@ -405,6 +411,17 @@
       margin-top: 13px;
     }
 
+    .form-status {
+      font-size: 14px;
+      margin-top: 14px;
+      min-height: 1em;
+    }
+
+    .form-status.is-ok { color: #1f4d3f; }
+    .form-status.is-err { color: #b04a2c; }
+
+    button[disabled] { opacity: .6; cursor: progress; }
+
     .btn.full { width: 100%; margin-top: 8px; }
 
     .approach {
@@ -703,12 +720,12 @@
       <div class="lead-box" id="contact">
         <h3>Want a straight read on your property?</h3>
         <p>Send the basics. We will review the location, acreage, infrastructure proximity, and development profile. If it looks interesting, we will contact you directly.</p>
-        <form class="form-grid" action="mailto:info@appinfra.ai" method="post" enctype="text/plain">
-          <input type="text" name="name" placeholder="Name" />
-          <input type="email" name="email" placeholder="Email" />
-          <input type="tel" name="phone" placeholder="Phone" />
-          <input type="text" name="property_location" placeholder="Property location / county" />
-          <select name="acreage">
+        <form class="form-grid" id="contact-form" novalidate>
+          <input type="text" name="name" placeholder="Name" required autocomplete="name" />
+          <input type="email" name="email" placeholder="Email" required autocomplete="email" />
+          <input type="tel" name="phone" placeholder="Phone" required autocomplete="tel" />
+          <input type="text" name="property_location" placeholder="Property location / county" required />
+          <select name="acreage" required>
             <option value="">Approximate acreage</option>
             <option>Under 100 acres</option>
             <option>100–500 acres</option>
@@ -716,9 +733,10 @@
             <option>1,000+ acres</option>
             <option>Not sure</option>
           </select>
-          <textarea name="notes" placeholder="Anything useful: access roads, utilities, mining history, ownership, maps, or parcel information"></textarea>
+          <textarea name="message" placeholder="Anything useful: access roads, utilities, mining history, ownership, maps, or parcel information" required></textarea>
           <button class="btn primary full" type="submit">Submit Property</button>
         </form>
+        <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
         <div class="form-note">Submission does not create an obligation, listing agreement, appraisal, or valuation. Appalachia Infra reviews potential infrastructure readiness only.</div>
       </div>
     </section>
@@ -823,5 +841,55 @@
     <div><a href="mailto:info@appinfra.ai">info@appinfra.ai</a></div>
     <div>© 2026 Appalachia Infra LLC</div>
   </footer>
+  <script>
+    (function () {
+      const form = document.getElementById('contact-form');
+      if (!form) return;
+      const status = document.getElementById('form-status');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalLabel = submitBtn.textContent;
+
+      function setStatus(msg, kind) {
+        status.textContent = msg || '';
+        status.classList.remove('is-ok', 'is-err');
+        if (kind) status.classList.add('is-' + kind);
+      }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        setStatus('');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+
+        const data = Object.fromEntries(new FormData(form).entries());
+
+        try {
+          const res = await fetch('/api/form-submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          const out = await res.json().catch(() => ({}));
+
+          if (res.ok && out.ok) {
+            form.reset();
+            setStatus('Thanks — we’ll be in touch soon.', 'ok');
+          } else {
+            setStatus(out.error || 'Something went wrong. Please try again.', 'err');
+          }
+        } catch (err) {
+          setStatus('Network error. Please try again.', 'err');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalLabel;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

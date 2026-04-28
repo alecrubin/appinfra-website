@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page not found · Appalachia Infra</title>
+  <meta name="description" content="The page you were looking for could not be found. Return to Appalachia Infra.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/png" href="/assets/favicon/favicon-ondark-96x96.png" sizes="96x96" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon-ondark.svg" media="(prefers-color-scheme: dark)" />
+
+  <style>
+    :root {
+      --green-950: #0b241e;
+      --green-900: #10372d;
+      --green-800: #1f4d3f;
+      --cream: #f7f3ea;
+      --paper: #fbfaf6;
+      --terra: #c56749;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: #fff;
+      background:
+        linear-gradient(rgba(10, 34, 28, .82), rgba(10, 34, 28, .92)),
+        url('/assets/images/mountain-landscape.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .topbar {
+      padding: 28px 7%;
+      display: flex;
+      align-items: center;
+    }
+
+    .topbar img {
+      height: 44px;
+      width: auto;
+      display: block;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 40px 7%;
+    }
+
+    .panel {
+      max-width: 640px;
+      text-align: center;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--terra);
+      margin-bottom: 18px;
+    }
+
+    .code {
+      font-family: var(--serif);
+      font-size: clamp(96px, 18vw, 200px);
+      line-height: .95;
+      letter-spacing: -.04em;
+      margin: 0 0 8px;
+      text-shadow: 0 2px 22px rgba(0, 0, 0, .25);
+    }
+
+    .rule {
+      width: 66px;
+      height: 2px;
+      background: var(--terra);
+      margin: 22px auto 28px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(28px, 3.4vw, 42px);
+      line-height: 1.15;
+      margin: 0 0 18px;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, .88);
+      margin: 0 0 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 32px;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .055em;
+      border: 1px solid var(--terra);
+      background: var(--terra);
+      color: #fff;
+      transition: .2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: transparent;
+      color: var(--terra);
+      transform: translateY(-1px);
+    }
+
+    .footnote {
+      padding: 24px 7%;
+      font-family: var(--serif);
+      font-size: 13px;
+      color: rgba(255, 255, 255, .62);
+    }
+
+    @media (max-width: 720px) {
+      .topbar {
+        padding: 22px 24px
+      }
+
+      main {
+        padding: 24px
+      }
+
+      .footnote {
+        padding: 18px 24px;
+        font-size: 12px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a href="/" aria-label="Appalachia Infra home">
+      <img src="/assets/images/logo-light.svg" alt="Appalachia Infra">
+    </a>
+  </header>
+
+  <main>
+    <div class="panel">
+      <div class="kicker">Error 404</div>
+      <div class="code">404</div>
+      <div class="rule"></div>
+      <h1>This page is off the map.</h1>
+      <p>The page you were looking for doesn’t exist or has been moved. Head back to the homepage to find your way.</p>
+      <a class="btn" href="/">Return Home</a>
+    </div>
+  </main>
+
+  <div class="footnote">© 2026 Appalachia Infra LLC</div>
+</body>
+
+</html>

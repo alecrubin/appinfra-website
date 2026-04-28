@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appalachia Infra | Mountains to Megawatts</title>
+  <meta name="description"
+    content="Appalachia Infra connects Appalachian land, power, and fiber into turnkey infrastructure pathways for landowners, data center developers, hyperscalers, and capital partners." />
+  <link rel="canonical" href="https://appinfra.ai/v6">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="Appalachia Infra — Mountains to Megawatts">
+  <meta property="og:description" content="Digital infrastructure for West Virginia. Land, power, and fiber for the next generation of hyperscale compute.">
+  <meta property="og:url" content="https://appinfra.ai/v6">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+  <style>
+    :root {
+      --green-950: #0b241e;
+      --green-900: #10372d;
+      --green-800: #1f4d3f;
+      --green-100: #e3ebe4;
+      --cream: #f7f3ea;
+      --paper: #fbfaf6;
+      --terra: #c56749;
+      --text: #1f2b26;
+      --muted: #627069;
+      --line: rgba(22, 63, 52, .22);
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: Arial, Helvetica, sans-serif
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.5
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--serif);
+      font-weight: 400
+    }
+
+    .hero {
+      min-height: 780px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(90deg, rgba(10, 34, 28, .92), rgba(10, 34, 28, .68) 42%, rgba(10, 34, 28, .26) 74%, rgba(10, 34, 28, .08)), url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=2400&q=86');
+      background-size: cover;
+      background-position: center
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 78% 22%, rgba(255, 197, 115, .24), transparent 24%), linear-gradient(180deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .18));
+      pointer-events: none
+    }
+
+    .nav,
+    .hero-copy {
+      position: relative;
+      z-index: 2
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 34px 54px 0;
+      gap: 30px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 30px;
+      letter-spacing: -.03em
+    }
+
+    .brand-mark {
+      width: 74px;
+      height: 74px;
+      border: 2px solid rgba(255, 255, 255, .88);
+      display: grid;
+      place-items: center;
+      font-family: var(--serif);
+      font-size: 38px;
+      background: rgba(16, 55, 45, .62);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .18)
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 42px;
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .04em
+    }
+
+    .nav-links a {
+      opacity: .94
+    }
+
+    .nav-links .contact {
+      background: var(--green-900);
+      padding: 16px 34px;
+      border: 1px solid rgba(255, 255, 255, .18)
+    }
+
+    .hero-copy {
+      max-width: 880px;
+      padding: 116px 54px 86px
+    }
+
+    .hero-kicker {
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(255, 255, 255, .86);
+      margin-bottom: 22px
+    }
+
+    h1 {
+      font-size: clamp(58px, 6.4vw, 96px);
+      line-height: 1;
+      letter-spacing: -.052em;
+      margin: 0 0 24px;
+      text-shadow: 0 2px 22px rgba(0, 0, 0, .25)
+    }
+
+    .hero-tagline {
+      font-family: var(--serif);
+      font-style: italic;
+      color: #f2d5c6;
+      font-size: clamp(34px, 3.6vw, 54px);
+      line-height: 1.05;
+      margin: 0 0 30px;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, .22)
+    }
+
+    .hero-sub {
+      max-width: 710px;
+      font-size: 24px;
+      line-height: 1.42;
+      margin: 0;
+      color: rgba(255, 255, 255, .95);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, .18)
+    }
+
+    .hero-secondary {
+      max-width: 690px;
+      font-size: 17px;
+      line-height: 1.66;
+      color: rgba(255, 255, 255, .86);
+      margin-top: 20px
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin: 34px 0 42px;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .055em;
+      text-transform: uppercase
+    }
+
+    .button-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      min-width: 255px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 21px 30px;
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .045em;
+      border: 1px solid rgba(255, 255, 255, .78);
+      transition: .2s ease
+    }
+
+    .btn.filled {
+      background: rgba(22, 63, 52, .84)
+    }
+
+    .btn:hover {
+      background: var(--terra);
+      transform: translateY(-1px)
+    }
+
+    .hero-diagram {
+      position: absolute;
+      right: 5%;
+      bottom: 132px;
+      z-index: 1;
+      width: min(38vw, 620px);
+      opacity: .30;
+      filter: drop-shadow(0 12px 25px rgba(0, 0, 0, .3));
+      pointer-events: none
+    }
+
+    section {
+      padding: 82px 8%
+    }
+
+    .section-title {
+      font-size: 42px;
+      line-height: 1.1;
+      color: var(--green-900);
+      text-align: center;
+      margin: 0
+    }
+
+    .section-kicker {
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--terra);
+      margin-bottom: 10px
+    }
+
+    .title-rule {
+      width: 66px;
+      height: 2px;
+      background: var(--terra);
+      margin: 16px auto 42px
+    }
+
+    .intro-copy {
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.72
+    }
+
+    .small-rule {
+      width: 46px;
+      height: 2px;
+      background: var(--terra);
+      margin: 11px 0 24px
+    }
+
+    .strategy {
+      background: var(--paper)
+    }
+
+    .strategy-grid {
+      max-width: 1160px;
+      margin: 50px auto 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line)
+    }
+
+    .strategy-item {
+      padding: 30px 24px;
+      border-right: 1px solid var(--line)
+    }
+
+    .strategy-item:last-child {
+      border-right: none
+    }
+
+    .strategy-num {
+      font-family: var(--serif);
+      color: var(--terra);
+      font-size: 18px;
+      margin-bottom: 10px
+    }
+
+    .strategy-item h3 {
+      color: var(--green-900);
+      font-size: 24px;
+      line-height: 1.15;
+      margin: 0 0 10px
+    }
+
+    .strategy-item p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.65
+    }
+
+    .cred-strip {
+      background: var(--green-900);
+      color: #fff;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      padding: 38px 7.5%
+    }
+
+    .cred-item {
+      min-height: 132px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      padding: 0 30px;
+      border-right: 1px solid rgba(255, 255, 255, .32);
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: .045em
+    }
+
+    .cred-item:last-child {
+      border-right: none
+    }
+
+    .icon {
+      width: 56px;
+      height: 56px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.85;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: .92
+    }
+
+    .platform {
+      background: var(--cream)
+    }
+
+    .three-col {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center
+    }
+
+    .platform-card {
+      padding: 0 58px 12px;
+      border-right: 1px solid var(--line)
+    }
+
+    .platform-card:last-child {
+      border-right: none
+    }
+
+    .circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--green-100);
+      color: var(--green-900);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px
+    }
+
+    .circle .icon {
+      width: 43px;
+      height: 43px
+    }
+
+    .platform-card h3 {
+      font-size: 32px;
+      color: var(--green-900);
+      margin: 0 0 12px
+    }
+
+    .platform-card p {
+      margin: 0;
+      color: #5e6a64;
+      font-size: 15px;
+      line-height: 1.75
+    }
+
+    .site-proof {
+      background: var(--paper);
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 72px;
+      align-items: center;
+      padding-top: 70px;
+      padding-bottom: 70px
+    }
+
+    .site-proof h2,
+    .why-process h2 {
+      color: var(--green-900);
+      font-size: 38px;
+      margin: 0
+    }
+
+    .checks {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 19px;
+      color: #33413b
+    }
+
+    .checks li {
+      position: relative;
+      padding-left: 34px;
+      margin: 12px 0
+    }
+
+    .checks li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: -2px;
+      color: var(--green-900);
+      font-family: var(--sans);
+      font-weight: 900;
+      font-size: 21px
+    }
+
+    .wide-image {
+      min-height: 345px;
+      border: 1px solid rgba(20, 60, 49, .12);
+      background: linear-gradient(90deg, rgba(20, 60, 49, .66), rgba(20, 60, 49, .10)), url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1500&q=88');
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 18px 50px rgba(16, 55, 45, .10);
+      position: relative;
+      overflow: hidden
+    }
+
+    .wide-image:after {
+      content: "Mountains to Megawatts.";
+      position: absolute;
+      left: 28px;
+      bottom: 24px;
+      color: #fff;
+      font-family: var(--serif);
+      font-size: 34px;
+      max-width: 390px;
+      line-height: 1.15;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, .35)
+    }
+
+    .why-process {
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      gap: 76px;
+      align-items: start;
+      padding-top: 64px;
+      padding-bottom: 64px
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 38px;
+      margin-top: 28px;
+      text-align: center
+    }
+
+    .step {
+      position: relative
+    }
+
+    .step:not(:last-child):after {
+      content: "";
+      width: 62px;
+      height: 1.5px;
+      background: var(--green-900);
+      position: absolute;
+      top: 24px;
+      right: -50px
+    }
+
+    .step:not(:last-child):before {
+      content: "›";
+      position: absolute;
+      top: 7px;
+      right: -55px;
+      color: var(--green-900);
+      font-size: 34px;
+      line-height: 1
+    }
+
+    .num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--green-900);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      font-weight: 800;
+      font-size: 21px
+    }
+
+    .step-label {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: #293933;
+      line-height: 1.15
+    }
+
+    .profile-partners {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      padding: 0
+    }
+
+    .profile {
+      background: linear-gradient(rgba(20, 60, 49, .95), rgba(20, 60, 49, .95)), url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1400&q=88');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      padding: 60px 10% 68px
+    }
+
+    .partners {
+      background: linear-gradient(90deg, rgba(251, 250, 246, .98), rgba(251, 250, 246, .88) 58%, rgba(251, 250, 246, .50)), url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80');
+      background-size: cover;
+      background-position: center right;
+      padding: 60px 10% 68px
+    }
+
+    .profile h2,
+    .partners h2 {
+      font-size: 34px;
+      margin: 0
+    }
+
+    .partners h2 {
+      color: var(--green-900)
+    }
+
+    .profile-list {
+      list-style: none;
+      padding: 0;
+      margin: 28px 0 0;
+      font-size: 19px;
+      line-height: 1.5
+    }
+
+    .profile-list li {
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      margin: 13px 0
+    }
+
+    .mini-icon {
+      width: 26px;
+      height: 26px;
+      border: 1px solid rgba(255, 255, 255, .65);
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      flex: 0 0 auto
+    }
+
+    .partner-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(185px, 1fr));
+      gap: 24px 40px;
+      margin-top: 30px;
+      font-family: var(--serif);
+      font-size: 18px;
+      color: #34423d
+    }
+
+    .partner-item {
+      display: flex;
+      align-items: center;
+      gap: 14px
+    }
+
+    .partner-item .icon {
+      width: 35px;
+      height: 35px;
+      color: var(--green-900);
+      flex: 0 0 auto
+    }
+
+    .cta {
+      background: linear-gradient(rgba(31, 76, 65, .96), rgba(31, 76, 65, .96)), url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1800&q=88');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      padding: 62px 10% 68px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 54px
+    }
+
+    .cta h2 {
+      font-size: 40px;
+      margin: 0 0 12px
+    }
+
+    .cta p {
+      max-width: 680px;
+      font-size: 19px;
+      margin: 0;
+      color: rgba(255, 255, 255, .92);
+      line-height: 1.65
+    }
+
+    .cta .btn.light {
+      background: var(--paper);
+      color: var(--green-900);
+      border-color: var(--paper)
+    }
+
+    footer {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+      padding: 34px 8%;
+      background: var(--paper);
+      color: #645f58;
+      font-family: var(--serif);
+      font-size: 15px
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-family: var(--sans);
+      color: var(--green-900);
+      font-size: 20px
+    }
+
+    .footer-mark {
+      width: 45px;
+      height: 45px;
+      background: var(--green-900);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-family: var(--serif);
+      font-size: 22px;
+      flex: 0 0 auto
+    }
+
+    .footer-brand small {
+      font-family: var(--serif);
+      color: #7a736b;
+      font-size: 13px
+    }
+
+    @media(max-width:980px) {
+      .hero {
+        min-height: 720px;
+        background-position: center
+      }
+
+      .nav {
+        padding: 24px 24px 0
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .brand {
+        font-size: 21px
+      }
+
+      .brand-mark {
+        width: 54px;
+        height: 54px;
+        font-size: 28px
+      }
+
+      .hero-copy {
+        padding: 92px 24px 58px
+      }
+
+      h1 {
+        font-size: 50px
+      }
+
+      .hero-tagline {
+        font-size: 34px
+      }
+
+      .hero-sub {
+        font-size: 19px
+      }
+
+      .hero-diagram {
+        display: none
+      }
+
+      .cred-strip,
+      .three-col,
+      .site-proof,
+      .why-process,
+      .profile-partners,
+      .cta,
+      footer,
+      .strategy-grid {
+        grid-template-columns: 1fr
+      }
+
+      .cred-strip {
+        padding: 0
+      }
+
+      .cred-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, .24)
+      }
+
+      .strategy-item {
+        border-right: none;
+        border-bottom: 1px solid var(--line)
+      }
+
+      .strategy-item:last-child {
+        border-bottom: none
+      }
+
+      .platform-card {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding: 30px 18px
+      }
+
+      .platform-card:last-child {
+        border-bottom: none
+      }
+
+      .site-proof,
+      .why-process {
+        gap: 44px
+      }
+
+      .process {
+        grid-template-columns: 1fr;
+        gap: 31px
+      }
+
+      .step:not(:last-child):after,
+      .step:not(:last-child):before {
+        display: none
+      }
+
+      .partner-grid {
+        grid-template-columns: 1fr
+      }
+
+      .btn {
+        width: 100%;
+        min-width: auto
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero">
+    <nav class="nav"><a href="#" class="brand"><span class="brand-mark">A/I</span><span>appalachia·infra</span></a>
+      <div class="nav-links"><a href="#model">Model</a><a href="#inputs">Inputs</a><a href="#approach">Approach</a><a
+          href="#partners">Partners</a><a href="#contact" class="contact">Contact</a></div>
+    </nav>
+    <svg class="hero-diagram" viewBox="0 0 720 360" aria-hidden="true">
+      <g stroke="#fff" stroke-width="2" fill="none" opacity=".65">
+        <path d="M80 255 C180 190, 240 180, 330 220 S520 260, 650 150" />
+        <path d="M90 280 C210 205, 285 205, 390 248 S560 285, 665 185" />
+        <path d="M500 95 L540 260 L455 260 Z" />
+        <path d="M478 145 H524 M466 188 H534 M456 230 H545" />
+        <path d="M170 120 H270 M170 150 H270 M170 180 H270" />
+        <path d="M170 120 L135 95 M270 120 L310 95" />
+        <path d="M350 205 h80 v40 h-80z" />
+        <path d="M365 205 v-28 M390 205 v-42 M415 205 v-30" />
+      </g>
+    </svg>
+    <div class="hero-copy">
+      <div class="hero-kicker">Land · Power · Fiber</div>
+      <h1>Mountains to Megawatts.</h1>
+      <div class="hero-tagline">A turnkey infrastructure catalyst for next-generation compute.</div>
+      <p class="hero-sub">Appalachia Infra connects Appalachian landowners, power assets, fiber pathways, and hyperscale
+        demand into executable infrastructure opportunities across West Virginia.</p>
+      <p class="hero-secondary">We help convert underutilized land and energy-adjacent property into viable AI and data
+        center development pathways through land, power, fiber, and strategic coordination.</p>
+      <div class="hero-proof"><span>Land.</span><span>Power.</span><span>Fiber.</span><span>Execution.</span></div>
+      <div class="button-row"><a href="#model" class="btn filled">Our Model</a><a href="#contact" class="btn">Contact
+          Us</a></div>
+    </div>
+  </header>
+  <section class="strategy" id="model">
+    <div class="section-kicker">Turnkey Infrastructure Catalyst</div>
+    <h2 class="section-title">Connecting Landowners and Hyperscale Demand</h2>
+    <div class="title-rule"></div>
+    <p class="intro-copy">Appalachia Infra serves as a catalyst between Appalachian landowners, utilities, fiber
+      providers, developers, hyperscalers, and capital partners. Our role is to assemble the critical inputs — land,
+      power, and fiber — into a clearer path from raw opportunity to deployable infrastructure.</p>
+    <div class="strategy-grid">
+      <div class="strategy-item">
+        <div class="strategy-num">01</div>
+        <h3>Landowner Alignment</h3>
+        <p>We work with property owners to understand site potential, land control pathways, and development readiness.
+        </p>
+      </div>
+      <div class="strategy-item">
+        <div class="strategy-num">02</div>
+        <h3>Power Pathways</h3>
+        <p>Transmission access, load potential, utility engagement, and energy strategy are evaluated early.</p>
+      </div>
+      <div class="strategy-item">
+        <div class="strategy-num">03</div>
+        <h3>Fiber Connectivity</h3>
+        <p>Fiber proximity, routing, carrier access, and redundancy potential are screened as part of the site thesis.
+        </p>
+      </div>
+      <div class="strategy-item">
+        <div class="strategy-num">04</div>
+        <h3>Developer Readiness</h3>
+        <p>We organize the inputs developers and hyperscalers need to evaluate speed, scale, and feasibility.</p>
+      </div>
+      <div class="strategy-item">
+        <div class="strategy-num">05</div>
+        <h3>Strategic Coordination</h3>
+        <p>Engagement is handled directly and selectively, with the goal of moving serious projects forward.</p>
+      </div>
+    </div>
+  </section>
+  <section class="cred-strip">
+    <div class="cred-item"><svg class="icon" viewBox="0 0 64 64">
+        <path d="M8 42c10-12 16-22 24-22s14 10 24 22" />
+        <path d="M12 42h40" />
+        <path d="M22 34l10-10 10 10" />
+      </svg><span>100–1,000+<br>Acre Positions</span></div>
+    <div class="cred-item"><svg class="icon" viewBox="0 0 64 64">
+        <path d="M32 6v52" />
+        <path d="M20 20h24" />
+        <path d="M14 32h36" />
+        <path d="M24 58l8-52 8 52" />
+        <path d="M18 44h28" />
+      </svg><span>Transmission<br>Access</span></div>
+    <div class="cred-item"><svg class="icon" viewBox="0 0 64 64">
+        <path d="M8 20h30" />
+        <path d="M8 32h38" />
+        <path d="M8 44h30" />
+        <path d="M38 20l8-8h10" />
+        <path d="M46 32h10" />
+        <path d="M38 44l8 8h10" />
+      </svg><span>Fiber<br>Proximity</span></div>
+    <div class="cred-item"><svg class="icon" viewBox="0 0 64 64">
+        <path d="M28 8l4 8 8 2-4 8 6 8-8 4 2 10-10-2-8 6-2-10-8-4 6-8-4-8 10-2z" />
+      </svg><span>West Virginia<br>Focus</span></div>
+    <div class="cred-item"><svg class="icon" viewBox="0 0 64 64">
+        <rect x="14" y="12" width="36" height="9" />
+        <rect x="14" y="28" width="36" height="9" />
+        <rect x="14" y="44" width="36" height="9" />
+        <path d="M20 16h4M20 32h4M20 48h4" />
+      </svg><span>Built for<br>AI & Hyperscale</span></div>
+  </section>
+  <section class="platform" id="inputs">
+    <h2 class="section-title">The Critical Inputs</h2>
+    <div class="title-rule"></div>
+    <div class="three-col">
+      <div class="platform-card">
+        <div class="circle"><svg class="icon" viewBox="0 0 64 64">
+            <path d="M8 44l18-24 12 14 8-9 10 19z" />
+            <path d="M8 44h48" />
+          </svg></div>
+        <h3>Land</h3>
+        <p>Large-scale Appalachian land positions with site control potential, access considerations, and room for
+          phased development.</p>
+      </div>
+      <div class="platform-card">
+        <div class="circle"><svg class="icon" viewBox="0 0 64 64">
+            <path d="M32 6v52" />
+            <path d="M20 20h24" />
+            <path d="M14 32h36" />
+            <path d="M24 58l8-52 8 52" />
+            <path d="M18 44h28" />
+          </svg></div>
+        <h3>Power</h3>
+        <p>Transmission proximity, load potential, utility coordination, energy strategy, and scalable infrastructure
+          pathways.</p>
+      </div>
+      <div class="platform-card">
+        <div class="circle"><svg class="icon" viewBox="0 0 64 64">
+            <path d="M10 20h28" />
+            <path d="M10 32h34" />
+            <path d="M10 44h26" />
+            <path d="M38 20l10-8h8" />
+            <path d="M44 32h12" />
+            <path d="M36 44l12 8h8" />
+          </svg></div>
+        <h3>Fiber</h3>
+        <p>Backbone access, routing feasibility, carrier engagement, redundancy potential, and connectivity alignment.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="site-proof">
+    <div>
+      <h2>From Raw Land to Infrastructure-Ready Strategy</h2>
+      <div class="small-rule"></div>
+      <ul class="checks">
+        <li>Initial land and infrastructure assessment</li>
+        <li>Power and transmission pathway review</li>
+        <li>Fiber and access feasibility screening</li>
+        <li>Landowner and developer alignment</li>
+        <li>Project coordination toward deployable infrastructure</li>
+      </ul>
+    </div>
+    <div class="wide-image"></div>
+  </section>
+  <section class="why-process" id="approach">
+    <div>
+      <h2>Why West Virginia</h2>
+      <div class="small-rule"></div>
+      <ul class="checks">
+        <li>Large land positions</li>
+        <li>Energy-adjacent infrastructure</li>
+        <li>Transmission corridor potential</li>
+        <li>Strategic location for East Coast demand</li>
+        <li>Strong fit for next-generation compute growth</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Turnkey Pathway</h2>
+      <div class="small-rule"></div>
+      <div class="process">
+        <div class="step">
+          <div class="num">1</div>
+          <div class="step-label">Assess<br>Land</div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div class="step-label">Screen<br>Power</div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div class="step-label">Validate<br>Fiber</div>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <div class="step-label">Align<br>Partners</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="profile-partners" id="partners">
+    <div class="profile">
+      <h2>Typical Development Parameters</h2>
+      <div class="small-rule"></div>
+      <ul class="profile-list">
+        <li><span class="mini-icon">△</span>100–1,000+ acre land positions</li>
+        <li><span class="mini-icon">◉</span>50MW – 500MW+ capacity potential</li>
+        <li><span class="mini-icon">⌁</span>Transmission-accessible locations</li>
+        <li><span class="mini-icon">⇄</span>Fiber-accessible corridors</li>
+        <li><span class="mini-icon">▦</span>Phased deployment capability</li>
+      </ul>
+    </div>
+    <div class="partners">
+      <h2>Built for Landowners and Infrastructure Partners</h2>
+      <div class="small-rule"></div>
+      <div class="partner-grid">
+        <div class="partner-item"><svg class="icon" viewBox="0 0 64 64">
+            <path d="M8 44l18-24 12 14 8-9 10 19z" />
+            <path d="M8 44h48" />
+          </svg><span>Landowners</span></div>
+        <div class="partner-item"><svg class="icon" viewBox="0 0 64 64">
+            <rect x="12" y="18" width="14" height="32" />
+            <rect x="38" y="18" width="14" height="32" />
+            <path d="M26 26h12M26 42h12" />
+          </svg><span>Hyperscale Operators</span></div>
+        <div class="partner-item"><svg class="icon" viewBox="0 0 64 64">
+            <path d="M20 16h24v32H20z" />
+            <path d="M14 24h6M14 40h6M44 24h6M44 40h6M28 10v6M36 10v6M28 48v6M36 48v6" />
+          </svg><span>AI / Data Center Developers</span></div>
+        <div class="partner-item"><svg class="icon" viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="10" />
+            <path d="M32 8v8M32 48v8M8 32h8M48 32h8M15 15l6 6M43 43l6 6M49 15l-6 6M21 43l-6 6" />
+          </svg><span>Energy Partners</span></div>
+        <div class="partner-item"><svg class="icon" viewBox="0 0 64 64">
+            <path d="M12 52h40" />
+            <path d="M18 52V26h10v26" />
+            <path d="M36 52V18h10v34" />
+            <path d="M12 26l20-14 20 14" />
+          </svg><span>Capital Partners</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="cta" id="contact">
+    <div>
+      <h2>Site Assessment & Strategic Alignment</h2>
+      <p>Appalachia Infra works with landowners, developers, hyperscalers, energy partners, and capital groups to
+        evaluate land, power, and fiber alignment for next-generation infrastructure deployment.</p>
+    </div>
+    <div class="button-row"><a class="btn light" href="mailto:info@appinfra.ai">Request Assessment</a><a class="btn"
+        href="mailto:info@appinfra.ai">Contact Appalachia Infra</a></div>
+  </section>
+  <footer>
+    <div class="footer-brand"><span class="footer-mark">A/I</span>
+      <div>appalachia·infra<br><small>Appalachia Infra LLC</small></div>
+    </div>
+    <div>West Virginia</div>
+    <div>© 2026 Appalachia Infra LLC</div>
+  </footer>
+</body>
+
+</html>

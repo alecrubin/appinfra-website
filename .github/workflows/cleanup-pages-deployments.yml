@@ -52,9 +52,9 @@ jobs:
           CF_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           PROJECT_NAME: ${{ github.event.inputs.project_name || 'appinfra-website' }}
           KEEP_COUNT: ${{ github.event.inputs.keep_count || '10' }}
-          # PR runs are always dry-run. Manual dispatch uses the user input.
-          # Everything else (push to main, schedule) runs for real.
-          DRY_RUN: ${{ github.event_name == 'pull_request' && 'true' || (github.event.inputs.dry_run || 'false') }}
+          # Push to main runs for real. Otherwise use the workflow_dispatch
+          # input, falling back to true (dry-run) if no input is provided.
+          DRY_RUN: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && 'false' || (github.event.inputs.dry_run || 'true') }}
         run: |
           set -euo pipefail
 

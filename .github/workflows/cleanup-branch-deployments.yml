@@ -1,0 +1,138 @@
+name: Cleanup Deleted Branch Deployments
+
+# When a branch is deleted, delete the corresponding Cloudflare Pages
+# deployments that were tied to that branch (i.e. whose preview alias was
+# `<branch>.appinfra-website.pages.dev`).
+#
+# Hard guarantees (the workflow exits with no deletes if any of these fail):
+#   1. Only runs for branch deletions, never tag deletions.
+#   2. Refuses to act on the production branch (main).
+#   3. The current canonical / latest production deployments are never
+#      deleted, even if somehow they match the filter.
+
+on:
+  delete:
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    name: Run
+    runs-on: ubuntu-latest
+    if: github.event.ref_type == 'branch'
+    steps:
+      - name: Delete deployments for branch
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          PROJECT_NAME: appinfra-website
+          BRANCH: ${{ github.event.ref }}
+        run: |
+          set -euo pipefail
+
+          API_BASE="https://api.cloudflare.com/client/v4"
+          PROJECT_BASE="$API_BASE/accounts/$CF_ACCOUNT_ID/pages/projects/$PROJECT_NAME"
+          DEPLOY_URL="$PROJECT_BASE/deployments"
+          AUTH="Authorization: Bearer $CF_API_TOKEN"
+
+          echo "Branch deleted: $BRANCH"
+
+          # --- Production guard ----------------------------------------------
+          if [ "$BRANCH" = "main" ]; then
+            echo "Refusing to delete deployments for production branch 'main'."
+            exit 0
+          fi
+
+          # --- Identify protected production deployments ---------------------
+          # Hard guard: if we can't read the project, abort — never blind-delete.
+          echo "::group::Identifying live production deployment"
+          project_resp=$(curl -sf -H "$AUTH" "$PROJECT_BASE")
+          canonical_id=$(echo "$project_resp" | jq -r '.result.canonical_deployment.id // empty')
+          latest_id=$(echo "$project_resp" | jq -r '.result.latest_deployment.id // empty')
+
+          if [ -z "$canonical_id" ] && [ -z "$latest_id" ]; then
+            echo "Could not determine canonical or latest deployment — aborting for safety."
+            exit 1
+          fi
+
+          echo "canonical_deployment.id = ${canonical_id:-<none>}"
+          echo "latest_deployment.id    = ${latest_id:-<none>}"
+          echo "::endgroup::"
+
+          # --- Fetch every deployment (paginated, 25/page) -------------------
+          echo "::group::Fetching deployments"
+          all='[]'
+          page=1
+          while :; do
+            resp=$(curl -sf -H "$AUTH" "$DEPLOY_URL?page=$page&per_page=25")
+            chunk=$(echo "$resp" | jq '.result')
+            count=$(echo "$chunk" | jq 'length')
+            [ "$count" -eq 0 ] && break
+            all=$(jq -s '.[0] + .[1]' <(echo "$all") <(echo "$chunk"))
+            page=$((page+1))
+          done
+          total=$(echo "$all" | jq 'length')
+          echo "Found $total total deployment(s)"
+          echo "::endgroup::"
+
+          # --- Filter to deployments tied to the deleted branch --------------
+          # Match on deployment_trigger.metadata.branch (the original branch
+          # name as recorded by Cloudflare). Skip canonical/latest defensively.
+          to_delete=$(echo "$all" | jq -c \
+            --arg branch "$BRANCH" \
+            --arg canonical "$canonical_id" \
+            --arg latest "$latest_id" \
+            '
+              .[]
+              | select((.deployment_trigger.metadata.branch // "") == $branch)
+              | select(.id != $canonical)
+              | select(.id != $latest)
+              | {
+                  id,
+                  created_on,
+                  environment,
+                  branch: (.deployment_trigger.metadata.branch // "unknown")
+                }
+            ')
+
+          if [ -z "$to_delete" ]; then
+            echo "No deployments found for branch '$BRANCH'."
+            exit 0
+          fi
+
+          # --- Final defensive sanity check ----------------------------------
+          while IFS= read -r row; do
+            id=$(echo "$row" | jq -r '.id')
+            if [ "$id" = "$canonical_id" ] || [ "$id" = "$latest_id" ]; then
+              echo "FATAL: deletion list contains protected deployment $id — aborting."
+              exit 1
+            fi
+          done <<< "$to_delete"
+
+          # --- Delete --------------------------------------------------------
+          echo "::group::Deleting deployments"
+          deleted=0
+          skipped=0
+          while IFS= read -r row; do
+            id=$(echo "$row" | jq -r '.id')
+            created=$(echo "$row" | jq -r '.created_on')
+            environment=$(echo "$row" | jq -r '.environment')
+            label="$id  [$environment] ($BRANCH  $created)"
+
+            http_code=$(curl -s -o /tmp/cf-resp.json -w "%{http_code}" \
+              -X DELETE -H "$AUTH" "$DEPLOY_URL/$id?force=true" || true)
+
+            if [ "$http_code" = "200" ]; then
+              echo "deleted   $label"
+              deleted=$((deleted+1))
+            else
+              msg=$(jq -r '.errors[0].message // "unknown error"' /tmp/cf-resp.json 2>/dev/null || echo "unknown error")
+              echo "skipped   $label  ($http_code: $msg)"
+              skipped=$((skipped+1))
+            fi
+          done <<< "$to_delete"
+          echo "::endgroup::"
+
+          echo ""
+          echo "Done. branch=$BRANCH deleted=$deleted skipped=$skipped"

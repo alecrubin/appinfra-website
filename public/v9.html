@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appalachia Infra | Mountains to Megawatts</title>
+  <meta name="description" content="If you own land in Appalachia, we want to talk. Appalachia Infra turns underproductive West Virginia acres into hyperscale-ready data center campuses for the AI economy — alongside the families who've held that land for generations." />
+  <link rel="canonical" href="https://appinfra.ai">
+  <meta property="og:title" content="Appalachia Infra | Mountains to Megawatts">
+  <meta property="og:description" content="If you own land in Appalachia, we want to talk. Appalachia Infra turns underproductive West Virginia acres into hyperscale-ready data center campuses — alongside the families who've held that land for generations.">
+  <meta property="og:url" content="https://appinfra.ai/v9">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://appinfra.ai/assets/appinfra-og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Appalachia Infra — Mountains to Megawatts">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Appalachia Infra | Mountains to Megawatts">
+  <meta name="twitter:description" content="If you own land in Appalachia, we want to talk. Appalachia Infra turns underproductive West Virginia acres into hyperscale-ready data center campuses for the AI economy.">
+  <meta name="twitter:image" content="https://appinfra.ai/assets/appinfra-og-image.png">
+  <meta name="robots" content="noindex">
+
+  <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" media="(prefers-color-scheme: light)" />
+  <link rel="shortcut icon" href="/favicon.ico" media="(prefers-color-scheme: light)" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/png" href="/assets/favicon/favicon-ondark-96x96.png" sizes="96x96" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon-ondark.svg" media="(prefers-color-scheme: dark)" />
+  <link rel="shortcut icon" href="/favicon-ondark.ico" media="(prefers-color-scheme: dark)" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon-ondark.png" media="(prefers-color-scheme: dark)" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Narrow:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600;700&family=Zilla+Slab:ital,wght@0,500;0,600;1,400;1,500&display=swap" />
+
+  <link rel="preload" as="image" href="/assets/images/mountain-landscape.jpg" fetchpriority="high">
+
+  <style>
+    :root {
+      --green-950: #0b241e;
+      --green-900: #10372d;
+      --green-800: #163f34;
+      --green-700: #1f4d3f;
+      --green-100: #e3ebe4;
+      --cream: #f7f3ea;
+      --cream-deep: #ede5d2;
+      --paper: #fbfaf6;
+      --terra: #c56749;
+      --terra-deep: #b25739;
+      --terra-soft: #f2d5c6;
+      --text: #1f2b26;
+      --text-muted: #4f5b55;
+      --muted: #627069;
+      --white: #fff;
+      --line: rgba(22, 63, 52, .22);
+      --line-soft: rgba(22, 63, 52, .12);
+
+      --sans: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --sans-narrow: "Archivo Narrow", "Archivo", system-ui, sans-serif;
+      --slab: "Zilla Slab", "Iowan Old Style", Georgia, serif;
+      --display: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+      --tight: -0.022em;
+      --tighter: -0.035em;
+      --tightest: -0.048em;
+      --label: 0.14em;
+      --label-tight: 0.08em;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.55;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern", "liga", "calt", "ss01";
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--terra);
+      outline-offset: 3px;
+      border-radius: 1px;
+    }
+
+    .btn:focus-visible,
+    .nav-toggle:focus-visible {
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 12px 18px;
+      background: var(--terra);
+      color: var(--white);
+      font-family: var(--sans-narrow);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--label);
+      transform: translateY(-100%);
+      transition: transform .15s ease;
+      z-index: 10;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* ============= TYPE UTILITIES ============= */
+
+    .label {
+      font-family: var(--sans-narrow);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: var(--label);
+      text-transform: uppercase;
+    }
+
+    .label-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .label-mark::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'><path d='M7 1 L13 13 L1 13 Z' fill='%23c56749'/><circle cx='7' cy='9' r='1.4' fill='%23fbfaf6'/></svg>");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .label-mark.is-light::before {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'><path d='M7 1 L13 13 L1 13 Z' fill='%23f2d5c6'/><circle cx='7' cy='9' r='1.4' fill='%2310372d'/></svg>");
+    }
+
+    .coord {
+      font-family: var(--sans-narrow);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: var(--label-tight);
+      text-transform: uppercase;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-muted);
+    }
+
+    .pull {
+      font-family: var(--slab);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.012em;
+    }
+
+    /* ============= HERO ============= */
+
+    .hero {
+      min-height: clamp(640px, 92vh, 880px);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(96deg, rgba(10, 34, 28, .92) 0%, rgba(10, 34, 28, .72) 38%, rgba(10, 34, 28, .42) 72%, rgba(10, 34, 28, .18) 100%),
+        url("/assets/images/mountain-landscape.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero::after {
+      /* Coordinate marker bottom-right of hero */
+      content: "38.349°N · 81.633°W";
+      position: absolute;
+      bottom: 22px;
+      right: 28px;
+      font-family: var(--sans-narrow);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: var(--label-tight);
+      color: rgba(255, 255, 255, .5);
+      font-variant-numeric: tabular-nums;
+      pointer-events: none;
+    }
+
+    .nav {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px 54px 0;
+      gap: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 56px;
+      height: 56px;
+      border: 1px solid rgba(255, 255, 255, .92);
+      display: grid;
+      place-items: center;
+      font-family: var(--display);
+      font-size: 1.4375rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      background: rgba(16, 55, 45, .62);
+    }
+
+    .brand-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .brand-name {
+      font-size: 1.3125rem;
+      font-weight: 600;
+      letter-spacing: var(--tighter);
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-family: var(--sans-narrow);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: var(--label);
+      color: rgba(255, 255, 255, .72);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55em;
+    }
+
+    .brand-sub-dot {
+      display: inline-block;
+      width: 0.28em;
+      height: 0.28em;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .6);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, .4);
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      cursor: pointer;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: var(--white);
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(5.5px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-5.5px) rotate(-45deg);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-family: var(--sans-narrow);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: var(--label);
+      color: rgba(255, 255, 255, .92);
+    }
+
+    .nav-links a {
+      opacity: .82;
+      transition: opacity .15s ease;
+      padding: 4px 0;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    .nav-links .contact {
+      background: transparent;
+      padding: 11px 20px;
+      border: 1px solid rgba(255, 255, 255, .55);
+      font-weight: 600;
+      transition: background-color .15s ease, border-color .15s ease;
+    }
+
+    .nav-links .contact:hover {
+      background: rgba(255, 255, 255, .08);
+      border-color: var(--white);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+      padding: 110px 54px 120px;
+    }
+
+    .hero-kicker {
+      color: var(--terra-soft);
+      margin-bottom: 26px;
+    }
+
+    h1 {
+      font-family: var(--sans);
+      font-size: clamp(3rem, 7.6vw, 6.5rem);
+      line-height: 0.98;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      margin: 0 0 1rem;
+    }
+
+    h1 .ampersand {
+      font-family: var(--slab);
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      color: var(--terra-soft);
+    }
+
+    .hero-tagline {
+      font-family: var(--slab);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--terra-soft);
+      font-size: clamp(1.5rem, 2.7vw, 2.125rem);
+      line-height: 1.22;
+      letter-spacing: -0.012em;
+      margin: 0 0 1.625rem;
+      max-width: 50ch;
+      text-wrap: balance;
+    }
+
+    .hero-sub {
+      max-width: 44rem;
+      font-size: 1.1875rem;
+      font-weight: 400;
+      line-height: 1.55;
+      letter-spacing: -0.005em;
+      margin: 0 0 2rem;
+      color: rgba(255, 255, 255, .94);
+    }
+
+    .hero-sub strong {
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .button-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .btn {
+      min-width: 240px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px 28px;
+      font-family: var(--sans-narrow);
+      text-transform: uppercase;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      border: 1px solid rgba(255, 255, 255, .78);
+      transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+      cursor: pointer;
+      background: transparent;
+      color: inherit;
+    }
+
+    .btn.filled {
+      background: var(--terra);
+      border-color: var(--terra);
+      color: var(--white);
+    }
+
+    .btn.filled:hover {
+      background: var(--terra-deep);
+      border-color: var(--terra-deep);
+    }
+
+    .btn:not(.filled):hover {
+      background: rgba(255, 255, 255, .08);
+      border-color: var(--white);
+    }
+
+    .btn .arrow {
+      width: 14px;
+      height: 10px;
+      flex-shrink: 0;
+    }
+
+    .hero-tertiary {
+      font-family: var(--sans-narrow);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      color: rgba(255, 255, 255, .72);
+    }
+
+    .hero-tertiary a {
+      color: rgba(255, 255, 255, .92);
+      border-bottom: 1px solid rgba(255, 255, 255, .35);
+      padding-bottom: 1px;
+      transition: color .15s ease, border-color .15s ease;
+    }
+
+    .hero-tertiary a:hover {
+      color: var(--terra-soft);
+      border-bottom-color: var(--terra-soft);
+    }
+
+    /* ============= TOPO RIDGE DIVIDERS ============= */
+
+    .ridge-divider {
+      display: block;
+      width: 100%;
+      height: 56px;
+      background: var(--paper);
+    }
+
+    .ridge-divider svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .ridge-divider.from-hero {
+      background: linear-gradient(180deg, rgba(10, 34, 28, .12) 0%, transparent 100%), var(--paper);
+    }
+
+    /* ============= SECTIONS (general) ============= */
+
+    section {
+      padding: 96px 8%;
+    }
+
+    .section-kicker {
+      color: var(--terra);
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-family: var(--sans);
+      font-size: clamp(2.125rem, 3.6vw, 2.875rem);
+      font-weight: 600;
+      line-height: 1.04;
+      letter-spacing: var(--tighter);
+      color: var(--green-900);
+      margin: 0;
+    }
+
+    .small-rule {
+      width: 56px;
+      height: 2px;
+      background: var(--terra);
+      margin: 18px 0 28px;
+    }
+
+    /* ============= LANDOWNER SECTION (primary conversion) ============= */
+
+    .landowner {
+      background: var(--paper);
+      position: relative;
+      padding: 80px 8% 96px;
+    }
+
+    .landowner-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 88px;
+      align-items: start;
+    }
+
+    .landowner-lead {
+      max-width: 38rem;
+    }
+
+    .landowner-lead h2 {
+      font-family: var(--sans);
+      font-size: clamp(2.25rem, 3.8vw, 3.125rem);
+      font-weight: 600;
+      line-height: 1.04;
+      letter-spacing: -0.038em;
+      color: var(--green-900);
+      margin: 14px 0 22px;
+    }
+
+    .landowner-lead h2 em {
+      font-family: var(--slab);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--terra);
+    }
+
+    .landowner-lead p {
+      font-size: 1.125rem;
+      line-height: 1.62;
+      letter-spacing: -0.005em;
+      color: var(--text);
+      margin: 0 0 1.125rem;
+    }
+
+    .landowner-lead p:last-of-type {
+      margin-bottom: 36px;
+    }
+
+    /* "How it works" 4-step */
+    .how-it-works {
+      margin-top: 36px;
+      border-top: 1px solid var(--line-soft);
+      padding-top: 32px;
+    }
+
+    .how-it-works h3 {
+      font-family: var(--sans);
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: -0.012em;
+      color: var(--green-900);
+      margin: 0 0 22px;
+    }
+
+    .steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 18px;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 14px;
+      align-items: baseline;
+    }
+
+    .step-num {
+      font-family: var(--sans-narrow);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--terra);
+      letter-spacing: var(--label-tight);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .step-num::before {
+      content: "0";
+      opacity: .5;
+      margin-right: 1px;
+    }
+
+    .step-num::after {
+      content: "";
+      display: inline-block;
+      width: 14px;
+      height: 1px;
+      background: var(--terra);
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .step-body strong {
+      display: block;
+      font-weight: 600;
+      color: var(--green-900);
+      font-size: 1rem;
+      margin-bottom: 3px;
+      letter-spacing: -0.012em;
+    }
+
+    .step-body span {
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+    }
+
+    .trust-line {
+      margin-top: 30px;
+      padding: 18px 22px;
+      background: var(--cream);
+      font-family: var(--sans);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--green-900);
+    }
+
+    .trust-line strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .trust-line .dot {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--terra);
+      margin: 0 8px;
+      vertical-align: middle;
+    }
+
+    /* ============= FORM CARD (inside landowner section) ============= */
+
+    .form-card {
+      background: var(--green-900);
+      color: var(--white);
+      padding: 36px 36px 32px;
+      position: relative;
+    }
+
+    .form-card::before {
+      /* Topographic contour decoration top-right corner */
+      content: "";
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      width: 90px;
+      height: 90px;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90' fill='none' stroke='%23c56749' stroke-width='1' opacity='.62'><path d='M90 8 C 70 12, 50 22, 38 36 C 28 50, 20 62, 0 74'/><path d='M90 22 C 74 24, 58 30, 48 42 C 40 54, 30 66, 14 80'/><path d='M90 36 C 80 36, 64 40, 56 50 C 48 60, 40 72, 28 90'/></svg>");
+      background-repeat: no-repeat;
+    }
+
+    .form-card .label {
+      color: var(--terra-soft);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .form-card h3 {
+      font-family: var(--sans);
+      font-size: 1.625rem;
+      font-weight: 600;
+      letter-spacing: -0.022em;
+      line-height: 1.12;
+      margin: 0 0 8px;
+      max-width: 22ch;
+    }
+
+    .form-card .form-lead {
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, .82);
+      margin: 0 0 24px;
+      max-width: 32ch;
+    }
+
+    .inquiry-form {
+      display: grid;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .field {
+      display: block;
+      width: 100%;
+    }
+
+    .field-label {
+      display: block;
+      font-family: var(--sans-narrow);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: var(--label);
+      font-weight: 600;
+      color: rgba(255, 255, 255, .78);
+      margin-bottom: 6px;
+    }
+
+    .field-help {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, .58);
+      line-height: 1.4;
+    }
+
+    .field-help.is-error {
+      color: #f2c2af;
+    }
+
+    .inquiry-form input,
+    .inquiry-form select,
+    .inquiry-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, .26);
+      background: rgba(255, 255, 255, .06);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.9375rem;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      outline: none;
+      border-radius: 0;
+      transition: border-color .15s ease, background-color .15s ease;
+    }
+
+    .inquiry-form input:focus,
+    .inquiry-form select:focus,
+    .inquiry-form textarea:focus {
+      border-color: var(--terra);
+      background: rgba(255, 255, 255, .10);
+    }
+
+    .inquiry-form input[aria-invalid="true"],
+    .inquiry-form select[aria-invalid="true"],
+    .inquiry-form textarea[aria-invalid="true"] {
+      border-color: #f2c2af;
+    }
+
+    .inquiry-form select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='white' stroke-opacity='.7' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+      cursor: pointer;
+    }
+
+    .inquiry-form select option {
+      color: var(--text);
+      background: var(--paper);
+    }
+
+    .inquiry-form textarea {
+      min-height: 160px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .inquiry-form input::placeholder,
+    .inquiry-form textarea::placeholder {
+      color: rgba(255, 255, 255, .42);
+    }
+
+    .char-counter {
+      display: block;
+      margin-top: 6px;
+      text-align: right;
+      font-family: var(--sans-narrow);
+      font-size: 0.6875rem;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: var(--label-tight);
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+    }
+
+    .char-counter.is-near {
+      color: rgba(255, 255, 255, .82);
+    }
+
+    .char-counter.is-over {
+      color: #f2c2af;
+    }
+
+    .form-actions {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .form-submit {
+      flex: 1 1 200px;
+      min-width: auto;
+      background: var(--terra);
+      color: var(--white);
+      border-color: var(--terra);
+      cursor: pointer;
+    }
+
+    .form-submit:hover {
+      background: var(--terra-deep);
+      border-color: var(--terra-deep);
+    }
+
+    .form-submit:disabled {
+      opacity: .6;
+      cursor: progress;
+    }
+
+    .form-call {
+      font-family: var(--sans-narrow);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: var(--label);
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .78);
+    }
+
+    .form-call a {
+      color: var(--terra-soft);
+      border-bottom: 1px solid rgba(242, 213, 198, .42);
+      padding-bottom: 1px;
+    }
+
+    .form-call a:hover {
+      border-bottom-color: var(--terra-soft);
+    }
+
+    .form-status {
+      grid-column: 1 / -1;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      letter-spacing: -0.005em;
+      font-weight: 500;
+      margin-top: 6px;
+      min-height: 1.4em;
+      color: rgba(255, 255, 255, .78);
+    }
+
+    .form-status.is-ok {
+      color: #cfe9d6;
+    }
+
+    .form-status.is-err {
+      color: #f2c2af;
+    }
+
+    .form-fallback {
+      display: none;
+      margin-top: 10px;
+      padding: 12px 14px;
+      background: rgba(242, 194, 175, .12);
+      border: 1px solid rgba(242, 194, 175, .32);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, .92);
+    }
+
+    .form-fallback.is-shown {
+      display: block;
+    }
+
+    .form-fallback a {
+      color: var(--terra-soft);
+      border-bottom: 1px solid rgba(242, 213, 198, .5);
+    }
+
+    /* ============= "FOR OTHERS" SECTION (asymmetric 2-up) ============= */
+
+    .for-others {
+      background: var(--cream);
+      padding: 96px 8% 104px;
+    }
+
+    .for-others-head {
+      max-width: 1240px;
+      margin: 0 auto 56px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
+      align-items: end;
+    }
+
+    .for-others-head h2 {
+      font-family: var(--sans);
+      font-size: clamp(2rem, 3.4vw, 2.625rem);
+      font-weight: 600;
+      letter-spacing: var(--tighter);
+      line-height: 1.04;
+      color: var(--green-900);
+      margin: 14px 0 0;
+      max-width: 22ch;
+    }
+
+    .for-others-head p {
+      font-size: 1rem;
+      line-height: 1.62;
+      color: var(--text-muted);
+      margin: 0;
+      max-width: 36ch;
+    }
+
+    .for-others-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+    }
+
+    .other-card {
+      background: var(--paper);
+      padding: 36px 36px 32px;
+      position: relative;
+      border: 1px solid var(--line-soft);
+    }
+
+    .other-card .other-coord {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+    }
+
+    .other-card .other-figure {
+      height: 110px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .other-card svg {
+      max-width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .other-card h3 {
+      font-family: var(--sans);
+      font-size: 1.4375rem;
+      font-weight: 600;
+      letter-spacing: -0.022em;
+      line-height: 1.12;
+      color: var(--green-900);
+      margin: 0 0 12px;
+    }
+
+    .other-card p {
+      font-size: 0.9375rem;
+      line-height: 1.62;
+      color: var(--text-muted);
+      margin: 0 0 18px;
+    }
+
+    .other-card .label {
+      color: var(--terra);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .other-card .other-spec {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 6px;
+      border-top: 1px solid var(--line-soft);
+      padding-top: 16px;
+      font-family: var(--sans-narrow);
+      font-size: 0.8125rem;
+      letter-spacing: 0;
+      color: var(--green-900);
+    }
+
+    .other-card .other-spec li {
+      display: grid;
+      grid-template-columns: 7em 1fr;
+      gap: 14px;
+    }
+
+    .other-card .other-spec li span:first-child {
+      text-transform: uppercase;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: var(--label);
+      color: var(--text-muted);
+      align-self: center;
+    }
+
+    /* ============= WHY WV ============= */
+
+    .why-wv {
+      background: var(--paper);
+      padding: 96px 8% 88px;
+    }
+
+    .why-wv-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .why-wv-text h2 {
+      font-family: var(--sans);
+      color: var(--green-900);
+      font-weight: 600;
+      font-size: clamp(2rem, 3.4vw, 2.5rem);
+      letter-spacing: var(--tighter);
+      line-height: 1.04;
+      margin: 14px 0 0;
+    }
+
+    .why-wv-text h2 em {
+      font-family: var(--slab);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--terra);
+    }
+
+    .why-wv-text p {
+      color: var(--text);
+      font-size: 1.0625rem;
+      font-weight: 400;
+      line-height: 1.7;
+      letter-spacing: -0.005em;
+      margin: 0 0 1.125rem;
+    }
+
+    .why-wv-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .why-wv-text p strong {
+      color: var(--green-900);
+      font-weight: 600;
+    }
+
+    .why-wv-image {
+      position: relative;
+      min-height: 460px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .42) 100%),
+        url("/assets/images/forest-ridge.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .why-wv-image::after {
+      content: "Mountains to Megawatts.";
+      position: absolute;
+      left: 28px;
+      bottom: 22px;
+      color: var(--white);
+      font-family: var(--slab);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.625rem;
+      letter-spacing: -0.012em;
+      max-width: 22rem;
+      line-height: 1.18;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, .5);
+    }
+
+    .corridor-strip {
+      max-width: 1240px;
+      margin: 56px auto 0;
+      padding: 28px 0 0;
+      border-top: 1px solid var(--line-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .corridor-svg {
+      width: 100%;
+      max-width: 720px;
+      height: 92px;
+      display: block;
+    }
+
+    .corridor-meta {
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      letter-spacing: -0.005em;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.5;
+      max-width: 22ch;
+    }
+
+    .corridor-meta strong {
+      display: block;
+      color: var(--green-900);
+      font-family: var(--sans-narrow);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: var(--label);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* ============= TEAM ============= */
+
+    .team {
+      background: var(--green-900);
+      color: var(--white);
+      text-align: left;
+      padding: 96px 8%;
+      position: relative;
+    }
+
+    .team-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .team-head .label {
+      color: var(--terra-soft);
+    }
+
+    .team-head h2 {
+      font-family: var(--sans);
+      font-size: clamp(2rem, 3.4vw, 2.5rem);
+      font-weight: 600;
+      letter-spacing: var(--tighter);
+      color: var(--white);
+      margin: 14px 0 0;
+      line-height: 1.04;
+      max-width: 16ch;
+    }
+
+    .team-head h2 em {
+      font-family: var(--slab);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--terra-soft);
+    }
+
+    .team-detail .lede {
+      font-size: 1.125rem;
+      line-height: 1.62;
+      letter-spacing: -0.005em;
+      color: rgba(255, 255, 255, .92);
+      margin: 0 0 24px;
+      max-width: 36rem;
+    }
+
+    .team-detail .lede strong {
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .credit-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255, 255, 255, .14);
+      margin: 32px 0 28px;
+    }
+
+    .credit-bar>div {
+      background: var(--green-900);
+      padding: 18px 20px;
+    }
+
+    .credit-bar .credit-num {
+      font-family: var(--sans);
+      font-size: clamp(1.625rem, 2.4vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--terra-soft);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 6px;
+    }
+
+    .credit-bar .credit-label {
+      font-family: var(--sans-narrow);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: var(--label);
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .68);
+      line-height: 1.4;
+    }
+
+    .team-tag {
+      font-family: var(--slab);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--terra-soft);
+    }
+
+    /* ============= FOOTER ============= */
+
+    footer {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+      padding: 44px 8% 36px;
+      background: var(--paper);
+      color: #645f58;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    footer a {
+      transition: color .15s ease;
+    }
+
+    footer a:hover {
+      color: var(--green-900);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--green-900);
+    }
+
+    .footer-mark {
+      width: 44px;
+      height: 44px;
+      background: var(--green-900);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      flex: 0 0 auto;
+    }
+
+    .footer-name {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: var(--tighter);
+      line-height: 1.1;
+      display: block;
+    }
+
+    .footer-tagline {
+      font-family: var(--sans-narrow);
+      text-transform: uppercase;
+      color: var(--terra);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: var(--label);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55em;
+      margin-top: 4px;
+    }
+
+    .footer-tagline-dot {
+      display: inline-block;
+      width: 0.28em;
+      height: 0.28em;
+      border-radius: 50%;
+      background: var(--terra);
+    }
+
+    .footer-label {
+      font-family: var(--sans-narrow);
+      text-transform: uppercase;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: var(--label);
+      color: #8a857c;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .footer-legal {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .footer-legal a {
+      color: #645f58;
+      border-bottom: 1px solid transparent;
+      transition: border-color .15s ease, color .15s ease;
+    }
+
+    .footer-legal a:hover {
+      color: var(--green-900);
+      border-bottom-color: var(--line-soft);
+    }
+
+    .footer-soon {
+      display: block;
+      margin-top: 6px;
+      font-style: italic;
+      color: #8a857c;
+      font-size: 0.8125rem;
+      font-family: var(--slab);
+    }
+
+    /* ============= MOBILE ============= */
+
+    @media (max-width: 980px) {
+      .hero {
+        min-height: 720px;
+      }
+
+      .hero::after {
+        display: none;
+      }
+
+      .nav {
+        padding: 22px 24px 0;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 14px);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: rgba(10, 34, 28, .96);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 4px 24px 18px;
+        border-top: 1px solid rgba(255, 255, 255, .12);
+        border-bottom: 1px solid rgba(255, 255, 255, .12);
+      }
+
+      .nav-links.is-open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, .08);
+      }
+
+      .nav-links .contact {
+        margin-top: 14px;
+        padding: 12px 18px;
+        text-align: center;
+      }
+
+      .brand-name {
+        font-size: 1.0625rem;
+      }
+
+      .brand-mark {
+        width: 46px;
+        height: 46px;
+        font-size: 1.125rem;
+      }
+
+      .brand-sub {
+        font-size: 0.625rem;
+      }
+
+      .hero-copy {
+        padding: 84px 24px 96px;
+      }
+
+      .landowner {
+        padding: 56px 7% 72px;
+      }
+
+      .landowner-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .form-card {
+        padding: 28px 24px 28px;
+      }
+
+      .for-others {
+        padding: 64px 7% 72px;
+      }
+
+      .for-others-head {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        align-items: start;
+        margin-bottom: 36px;
+      }
+
+      .for-others-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .why-wv {
+        padding: 64px 7% 72px;
+      }
+
+      .why-wv-inner {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .why-wv-image {
+        min-height: 280px;
+      }
+
+      .corridor-strip {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        align-items: start;
+      }
+
+      .corridor-meta {
+        text-align: left;
+      }
+
+      .team {
+        padding: 64px 7% 72px;
+      }
+
+      .team-inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .credit-bar {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px 24px;
+        padding: 36px 7%;
+      }
+
+      .btn {
+        width: 100%;
+        min-width: auto;
+      }
+
+      .button-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+      }
+
+      .form-submit {
+        flex: none;
+        width: 100%;
+        padding: 18px 28px;
+      }
+
+      .form-call {
+        text-align: center;
+      }
+
+      section {
+        padding: 64px 7%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      footer {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="hero">
+    <nav class="nav">
+      <a href="#" class="brand">
+        <span class="brand-mark">A/I</span>
+        <span class="brand-stack">
+          <span class="brand-name">appalachia·infra</span>
+          <span class="brand-sub">Land<span class="brand-sub-dot"></span>Power<span class="brand-sub-dot"></span>Fiber</span>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-links" id="primary-nav">
+        <a href="#submit">Submit Property</a>
+        <a href="#for-others">Developers</a>
+        <a href="#why-wv">Why WV</a>
+        <a href="#team">Team</a>
+        <a href="tel:3044182787" class="contact">Call (304) 418-2787</a>
+      </div>
+    </nav>
+
+    <div class="hero-copy">
+      <div class="label label-mark hero-kicker">West Virginia · Digital Infra</div>
+      <h1>Mountains <span class="ampersand">to</span> Megawatts.</h1>
+      <p class="hero-tagline">If you own land in Appalachia, we want to talk.</p>
+      <p class="hero-sub">We turn underproductive Appalachian acres into the foundation of the AI economy — alongside the families who've held that land for generations. <strong>One platform. One counterparty.</strong> From raw acreage through commissioning.</p>
+      <div class="button-row">
+        <a href="#submit" class="btn filled">
+          Submit your property
+          <svg class="arrow" viewBox="0 0 14 10" fill="none" aria-hidden="true">
+            <path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+        <a href="tel:3044182787" class="btn">Call Mark · (304) 418-2787</a>
+      </div>
+      <div class="hero-tertiary">
+        Developer or hyperscaler? <a href="#for-others">See how we deliver campuses →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Topographic ridge transition: hero → landowner -->
+  <div class="ridge-divider from-hero" aria-hidden="true">
+    <svg viewBox="0 0 1200 56" preserveAspectRatio="none">
+      <path d="M0 56 L0 38 L 60 32 L 110 22 L 160 28 L 220 14 L 280 24 L 340 10 L 410 22 L 470 6 L 540 18 L 610 8 L 680 20 L 750 4 L 820 16 L 890 10 L 950 22 L 1020 12 L 1090 26 L 1140 16 L 1200 30 L 1200 56 Z"
+        fill="#fbfaf6" />
+      <path d="M0 38 L 60 32 L 110 22 L 160 28 L 220 14 L 280 24 L 340 10 L 410 22 L 470 6 L 540 18 L 610 8 L 680 20 L 750 4 L 820 16 L 890 10 L 950 22 L 1020 12 L 1090 26 L 1140 16 L 1200 30"
+        fill="none" stroke="#163f34" stroke-width="1" stroke-opacity=".48" />
+    </svg>
+  </div>
+
+  <main id="main">
+
+    <!-- ============= LANDOWNER SECTION (primary conversion) ============= -->
+    <section class="landowner" id="submit" aria-labelledby="landowner-title">
+      <div class="landowner-inner">
+
+        <div class="landowner-lead">
+          <span class="label label-mark">For Landowners</span>
+          <h2 id="landowner-title">Your land may be worth <em>more than you think.</em></h2>
+          <p>If you own acreage in West Virginia or the surrounding Appalachian counties — pasture, timber stands, reclaimed mining ground, mineral-rights parcels, family holdings — we'd like to evaluate it. The AI buildout is moving inland, and the right Appalachian land has properties that data center developers will pay for: proximity to baseload power, fiber routes, water, and transmission.</p>
+          <p>You don't have to know any of that to start the conversation. <strong>Tell us what you have. We'll do the rest.</strong></p>
+
+          <div class="how-it-works">
+            <h3>How submitting works</h3>
+            <ol class="steps">
+              <li>
+                <span class="step-num">1</span>
+                <span class="step-body">
+                  <strong>Tell us about your land</strong>
+                  <span>Five-minute form below, or call Mark directly. Whatever's easiest.</span>
+                </span>
+              </li>
+              <li>
+                <span class="step-num">2</span>
+                <span class="step-body">
+                  <strong>We evaluate fit</strong>
+                  <span>We look at power, fiber, water, transmission, and topography. We tell you honestly whether your parcel is a candidate.</span>
+                </span>
+              </li>
+              <li>
+                <span class="step-num">3</span>
+                <span class="step-body">
+                  <strong>We discuss options</strong>
+                  <span>Lease, joint venture, purchase, or pass. Your call. Your terms.</span>
+                </span>
+              </li>
+              <li>
+                <span class="step-num">4</span>
+                <span class="step-body">
+                  <strong>You decide — on your timeline</strong>
+                  <span>Family land deserves a family conversation. There is no obligation at any step.</span>
+                </span>
+              </li>
+            </ol>
+          </div>
+
+          <div class="trust-line" role="note">
+            <strong>Your information stays with us.</strong>
+            We respond within 3 business days <span class="dot"></span> No obligation <span class="dot"></span> No fee
+          </div>
+        </div>
+
+        <div class="form-card">
+          <span class="label label-mark is-light">Submit Property</span>
+          <h3>Tell us what you have.</h3>
+          <p class="form-lead">Or call Mark directly: <a href="tel:3044182787" style="color: var(--terra-soft); border-bottom: 1px solid rgba(242, 213, 198, .42);">(304) 418-2787</a></p>
+
+          <form class="inquiry-form" id="inquiry-form" novalidate>
+            <div class="field">
+              <label class="field-label" for="party-type">I'm reaching out as</label>
+              <select id="party-type" name="inquiry_type" required aria-describedby="party-type-help">
+                <option value="Landowner / Property Owner" selected>A landowner / property owner</option>
+                <option value="Data Center Developer / Hyperscaler">A data center developer or hyperscaler</option>
+                <option value="Capital / Infrastructure Investor">A capital / infrastructure investor</option>
+                <option value="Economic Development / Government">Economic development or government</option>
+                <option value="Other Strategic Partner">Another kind of partner</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="name">Your name</label>
+              <input id="name" name="name" type="text" placeholder="First and last" required autocomplete="name" maxlength="200" aria-describedby="name-help" />
+            </div>
+            <div class="field">
+              <label class="field-label" for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email" maxlength="300" aria-describedby="email-help" />
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="phone">Phone <span style="font-weight: 500; opacity: .7;">(optional)</span></label>
+              <input id="phone" name="phone" type="tel" placeholder="(___) ___-____" autocomplete="tel" maxlength="40" />
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="message">Anything else we should know</label>
+              <textarea id="message" name="message" placeholder="A sentence or two is plenty. We'll follow up with the right questions." required maxlength="3000" aria-describedby="message-help"></textarea>
+              <span class="char-counter" id="char-counter" aria-live="polite">0 / 3000</span>
+            </div>
+
+            <div class="form-actions">
+              <button class="form-submit btn" type="submit">Submit</button>
+              <span class="form-call">Or call <a href="tel:3044182787">(304) 418-2787</a></span>
+            </div>
+            <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+            <div class="form-fallback" id="form-fallback">
+              Form not working? Call us at <a href="tel:3044182787">(304) 418-2787</a>.
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============= FOR OTHERS (developers + WV) ============= -->
+    <section class="for-others" id="for-others" aria-labelledby="for-others-title">
+      <div class="for-others-head">
+        <div>
+          <span class="label label-mark">A Single Accountable Platform</span>
+          <h2 id="for-others-title">Built for the buyer. Rooted <em>in the place.</em></h2>
+        </div>
+        <p>Not a broker, not a land assembler, not an EPC. One team carries each project from raw acreage through commissioning — accountable to the buyer, accountable to the county.</p>
+      </div>
+
+      <div class="for-others-grid">
+
+        <article class="other-card">
+          <span class="coord other-coord">39.0473° N · 80.0287° W</span>
+          <div class="other-figure" aria-hidden="true">
+            <!-- Substation / transmission diagram -->
+            <svg viewBox="0 0 280 110" fill="none" stroke="#163f34" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Ground line -->
+              <line x1="0" y1="98" x2="280" y2="98" stroke-opacity=".6" />
+              <!-- Transmission tower (left) -->
+              <path d="M40 98 L 40 28 M 30 98 L 50 98 M 26 38 L 54 38 M 30 50 L 50 50 M 32 62 L 48 62 M 18 28 L 62 28" stroke-opacity=".82" />
+              <!-- Conductors (catenary curves) -->
+              <path d="M40 36 Q 100 56 160 36" stroke="#c56749" stroke-opacity=".82" />
+              <path d="M40 50 Q 100 70 160 50" stroke="#c56749" stroke-opacity=".82" />
+              <!-- Substation (right) -->
+              <rect x="180" y="60" width="80" height="38" stroke-opacity=".82" />
+              <line x1="186" y1="60" x2="186" y2="48" stroke-opacity=".82" />
+              <line x1="200" y1="60" x2="200" y2="42" stroke-opacity=".82" />
+              <line x1="220" y1="60" x2="220" y2="36" stroke-opacity=".82" />
+              <line x1="240" y1="60" x2="240" y2="42" stroke-opacity=".82" />
+              <line x1="254" y1="60" x2="254" y2="48" stroke-opacity=".82" />
+              <!-- Connecting line tower → substation -->
+              <path d="M160 36 Q 170 50 200 60" stroke="#c56749" stroke-opacity=".82" />
+              <path d="M160 50 Q 170 60 220 60" stroke="#c56749" stroke-opacity=".82" />
+              <!-- Building / data center silhouette -->
+              <path d="M86 98 L 86 78 L 134 78 L 134 98" stroke-opacity=".4" />
+              <line x1="92" y1="84" x2="92" y2="92" stroke-opacity=".4" />
+              <line x1="100" y1="84" x2="100" y2="92" stroke-opacity=".4" />
+              <line x1="108" y1="84" x2="108" y2="92" stroke-opacity=".4" />
+              <line x1="116" y1="84" x2="116" y2="92" stroke-opacity=".4" />
+              <line x1="124" y1="84" x2="124" y2="92" stroke-opacity=".4" />
+            </svg>
+          </div>
+          <span class="label">For Developers &amp; Hyperscalers</span>
+          <h3>The fastest credible path to a West Virginia campus.</h3>
+          <p>Hyperscale-ready sites delivered turnkey: land, power, fiber, water, transmission, permitting. One counterparty from site evaluation through commissioning. We've spent careers on the buy side; we know what gets a deal across the line.</p>
+          <ul class="other-spec">
+            <li><span>Scope</span><span>Site selection · entitlement · construction · power delivery</span></li>
+            <li><span>Counterparty</span><span>One platform · one accountable team</span></li>
+            <li><span>Reach</span><span>Within the Ashburn / Columbus / Atlanta compute corridor</span></li>
+          </ul>
+        </article>
+
+        <article class="other-card">
+          <span class="coord other-coord">38.349° N · 81.633° W</span>
+          <div class="other-figure" aria-hidden="true">
+            <!-- Parcel sketch with topo -->
+            <svg viewBox="0 0 200 110" fill="none" stroke="#163f34" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Topographic contours background -->
+              <g stroke-opacity=".22">
+                <path d="M-10 30 C 30 26, 60 36, 90 30 C 120 24, 150 38, 200 30" />
+                <path d="M-10 50 C 30 46, 60 56, 90 50 C 120 44, 150 58, 200 50" />
+                <path d="M-10 72 C 30 68, 60 78, 90 72 C 120 66, 150 80, 200 72" />
+                <path d="M-10 92 C 30 88, 60 98, 90 92 C 120 86, 150 100, 200 92" />
+              </g>
+              <!-- Parcel outline (irregular polygon) -->
+              <path d="M40 26 L 92 18 L 152 32 L 168 64 L 132 92 L 78 96 L 32 76 Z"
+                stroke="#c56749" stroke-width="1.4" stroke-opacity=".88" fill="rgba(197, 103, 73, .06)" />
+              <!-- Benchmark mark inside parcel -->
+              <g stroke="#c56749" stroke-opacity=".9">
+                <path d="M100 50 L 106 60 L 94 60 Z" fill="#c56749" fill-opacity=".88" />
+                <line x1="100" y1="44" x2="100" y2="48" />
+                <line x1="100" y1="62" x2="100" y2="68" />
+                <line x1="86" y1="55" x2="93" y2="55" />
+                <line x1="107" y1="55" x2="114" y2="55" />
+              </g>
+            </svg>
+          </div>
+          <span class="label">For West Virginia</span>
+          <h3>Durable economic development, rooted in the counties.</h3>
+          <p>Jobs, tax base, and infrastructure built to stay. We work with state and local stakeholders before steel goes in the ground — because what we build is meant to outlast us.</p>
+          <ul class="other-spec">
+            <li><span>Local partners</span><span>State officials · utilities · permitting · trades</span></li>
+            <li><span>Built to stay</span><span>Long-life infrastructure · multi-decade assets</span></li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============= WHY WEST VIRGINIA ============= -->
+    <section class="why-wv" id="why-wv" aria-labelledby="why-wv-title">
+      <div class="why-wv-inner">
+        <div class="why-wv-text">
+          <span class="label label-mark">Why West Virginia</span>
+          <h2 id="why-wv-title">The country's <em>next compute corridor.</em></h2>
+          <div class="small-rule" aria-hidden="true"></div>
+          <p>West Virginia is being rediscovered — not for what it once produced, but for what it can power next.</p>
+          <p>The Mountain State has emerged as one of the most strategically positioned places in the country for data center development, expansion, and investment. Its energy footprint is unmatched: <strong>deep baseload generation, abundant low-cost power, and flexible microgrid capacity</strong> that delivers the scale and reliability the AI economy demands.</p>
+          <p>Geography reinforces the case. West Virginia sits in the middle of the country's primary AI compute corridor — between Ashburn, Columbus, and Atlanta — placing campuses within reach of the markets driving demand.</p>
+          <p>And the state has made it a priority to clear the path. Permitting, regulation, and policy are aligned to let data centers launch quickly and scale without friction.</p>
+        </div>
+        <div class="why-wv-image" role="img" aria-label="Forested ridges in West Virginia"></div>
+      </div>
+
+      <!-- Compute corridor strip — Ashburn / WV / Columbus / Atlanta -->
+      <div class="corridor-strip" aria-hidden="false">
+        <svg class="corridor-svg" viewBox="0 0 720 92" fill="none" role="img" aria-label="Compute corridor: Ashburn, West Virginia, Columbus, Atlanta">
+          <!-- Elevation strip / ridge silhouette -->
+          <path d="M0 76 L 24 70 L 56 64 L 92 56 L 130 50 L 168 44 L 210 38 L 252 32 L 296 30 L 340 28 L 386 26 L 432 30 L 478 34 L 524 40 L 568 48 L 612 56 L 658 62 L 700 70 L 720 76"
+            stroke="#163f34" stroke-width="1.2" stroke-opacity=".42" fill="none" />
+          <path d="M0 76 L 720 76" stroke="#163f34" stroke-width=".5" stroke-opacity=".22" stroke-dasharray="2 4" />
+
+          <!-- Connecting horizontal line through the cities -->
+          <line x1="64" y1="40" x2="656" y2="40" stroke="#c56749" stroke-width="1" stroke-opacity=".5" stroke-dasharray="3 4" />
+
+          <!-- Ashburn (left) -->
+          <circle cx="64" cy="40" r="3" fill="#c56749" />
+          <text x="64" y="22" text-anchor="middle" font-family="Archivo Narrow, sans-serif" font-size="10" font-weight="600" fill="#10372d" letter-spacing="1">ASHBURN</text>
+          <text x="64" y="58" text-anchor="middle" font-family="Archivo Narrow, sans-serif" font-size="9" fill="#4f5b55" letter-spacing="1">VA</text>
+
+          <!-- WV (center, emphasized) -->
+          <circle cx="280" cy="40" r="6" fill="#10372d" stroke="#c56749" stroke-width="2" />
+          <text x="280" y="20" text-anchor="middle" font-family="Archivo Narrow, sans-serif" font-size="11" font-weight="700" fill="#10372d" letter-spacing="1.4">WEST VIRGINIA</text>
+          <text x="280" y="58" text-anchor="middle" font-family="Archivo Narrow, sans-serif" font-size="9" fill="#c56749" letter-spacing="1" font-weight="600">YOU ARE HERE</text>
+
+          <!-- Columbus -->
+          <circle cx="440" cy="40" r="3" fill="#c56749" />
+          <text x="440" y="22" text-anchor="middle" font-family="Archivo Narrow, sans-serif" font-size="10" font-weight="600" fill="#10372d" letter-spacing="1">COLUMBUS</text>
+          <text x="440" y="58" text-anchor="middle" font-family="Archivo Narrow, sans-serif" font-size="9" fill="#4f5b55" letter-spacing="1">OH</text>
+
+          <!-- Atlanta -->
+          <circle cx="656" cy="40" r="3" fill="#c56749" />
+          <text x="656" y="22" text-anchor="middle" font-family="Archivo Narrow, sans-serif" font-size="10" font-weight="600" fill="#10372d" letter-spacing="1">ATLANTA</text>
+          <text x="656" y="58" text-anchor="middle" font-family="Archivo Narrow, sans-serif" font-size="9" fill="#4f5b55" letter-spacing="1">GA</text>
+        </svg>
+
+        <div class="corridor-meta">
+          <strong>Within reach.</strong>
+          Three of the country's primary<br />compute hubs &mdash; one corridor.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============= TEAM ============= -->
+    <section class="team" id="team" aria-labelledby="team-title">
+      <div class="team-inner">
+        <div class="team-head">
+          <span class="label label-mark is-light">The Team</span>
+          <h2 id="team-title">Built by <em>operators,</em> not optimizers.</h2>
+        </div>
+        <div class="team-detail">
+          <p class="lede">Appalachia Infra is led by <strong>Mark Rubin</strong>, a 35-year capital market and infrastructure veteran who has advised on more than $25 billion of transaction value across digital infrastructure, energy, real estate, and other capital-intensive sectors. Behind the platform is a cross-disciplined team of senior operators, expert advisors, and supply chain partners.</p>
+
+          <div class="credit-bar" aria-label="Track record">
+            <div>
+              <div class="credit-num">$25B+</div>
+              <div class="credit-label">Advised value</div>
+            </div>
+            <div>
+              <div class="credit-num">35</div>
+              <div class="credit-label">Years in infra</div>
+            </div>
+            <div>
+              <div class="credit-num">1</div>
+              <div class="credit-label">Counterparty</div>
+            </div>
+          </div>
+
+          <span class="team-tag">Team announcements coming soon.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <span class="footer-mark">A/I</span>
+      <div>
+        <span class="footer-name">appalachia·infra</span>
+        <span class="footer-tagline">
+          Land<span class="footer-tagline-dot"></span>Power<span class="footer-tagline-dot"></span>Fiber
+        </span>
+      </div>
+    </div>
+    <div>
+      <span class="footer-label">Office</span>
+      Charleston, West Virginia<br />
+      <span class="coord">38.349° N · 81.633° W</span>
+    </div>
+    <div>
+      <span class="footer-label">Contact</span>
+      <a href="tel:3044182787">(304) 418-2787</a>
+    </div>
+    <div class="footer-legal">
+      <span class="footer-label">© 2026 Appalachia Infra LLC</span>
+      <span class="footer-soon">Full site coming soon.</span>
+    </div>
+  </footer>
+
+  <script>
+    /* Nav toggle */
+    (function () {
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('primary-nav');
+      if (!toggle || !nav) return;
+
+      toggle.addEventListener('click', function () {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        toggle.setAttribute('aria-label', open ? 'Open navigation' : 'Close navigation');
+        nav.classList.toggle('is-open');
+      });
+
+      nav.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A' && nav.classList.contains('is-open')) {
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open navigation');
+          nav.classList.remove('is-open');
+        }
+      });
+    })();
+
+    /* Character counter on textarea */
+    (function () {
+      const ta = document.getElementById('message');
+      const counter = document.getElementById('char-counter');
+      if (!ta || !counter) return;
+
+      const max = parseInt(ta.getAttribute('maxlength') || '3000', 10);
+
+      function update() {
+        const len = ta.value.length;
+        counter.textContent = len.toLocaleString() + ' / ' + max.toLocaleString();
+        counter.classList.toggle('is-near', len >= max * 0.8 && len < max);
+        counter.classList.toggle('is-over', len >= max);
+      }
+
+      ta.addEventListener('input', update);
+      update();
+    })();
+
+    /* Inline validation + form submit (preserves existing /api/form-submit contract) */
+    (function () {
+      const form = document.getElementById('inquiry-form');
+      if (!form) return;
+      const status = document.getElementById('form-status');
+      const fallback = document.getElementById('form-fallback');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalLabel = submitBtn.textContent;
+
+      function setStatus(msg, kind) {
+        status.textContent = msg || '';
+        status.classList.remove('is-ok', 'is-err');
+        if (kind) status.classList.add('is-' + kind);
+      }
+
+      function setInvalid(input, isInvalid) {
+        if (input) input.setAttribute('aria-invalid', String(!!isInvalid));
+      }
+
+      function validate() {
+        let firstInvalid = null;
+        const required = form.querySelectorAll('[required]');
+        required.forEach(input => {
+          const isVisible = input.offsetParent !== null;
+          const ok = !isVisible || input.checkValidity();
+          setInvalid(input, !ok);
+          if (!ok && !firstInvalid) firstInvalid = input;
+        });
+        return firstInvalid;
+      }
+
+      form.addEventListener('input', function (e) {
+        if (e.target && e.target.matches('[aria-invalid="true"]')) {
+          setInvalid(e.target, !e.target.checkValidity());
+        }
+      });
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        fallback.classList.remove('is-shown');
+
+        const firstInvalid = validate();
+        if (firstInvalid) {
+          firstInvalid.focus();
+          setStatus('Please complete the highlighted fields.', 'err');
+          return;
+        }
+
+        setStatus('');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // Fold the optional phone into the message body so the existing
+        // /api/form-submit contract (name/email/inquiry_type/message) still works.
+        const composedMessage = data.phone
+          ? 'Phone: ' + data.phone + '\n\n' + (data.message || '')
+          : (data.message || '');
+
+        const payload = {
+          name: data.name,
+          email: data.email,
+          inquiry_type: data.inquiry_type,
+          message: composedMessage
+        };
+
+        try {
+          const res = await fetch('/api/form-submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const out = await res.json().catch(() => ({}));
+
+          if (res.ok && out.ok) {
+            form.reset();
+            const counter = document.getElementById('char-counter');
+            if (counter) counter.textContent = '0 / 3,000';
+            setStatus('Thanks — we’ll be in touch within 3 business days.', 'ok');
+          } else {
+            setStatus(out.error || 'Something went wrong sending your note.', 'err');
+            fallback.classList.add('is-shown');
+          }
+        } catch (err) {
+          setStatus('Network error — please try again, or call us.', 'err');
+          fallback.classList.add('is-shown');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalLabel;
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>

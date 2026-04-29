@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,14 +11,14 @@
   <meta property="og:description" content="Appalachia Infra is a West Virginia-based digital infrastructure platform that turns underproductive Appalachian land into hyperscale-ready campuses for the AI economy.">
   <meta property="og:url" content="https://appinfra.ai/v8">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://appinfra.ai/assets/appinfra-og-image.png">
+  <meta property="og:image" content="https://appinfra.ai/assets/images/appinfra-og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Appalachia Infra — Mountains to Megawatts">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Appalachia Infra | Mountains to Megawatts">
   <meta name="twitter:description" content="Appalachia Infra is a West Virginia-based digital infrastructure platform that turns underproductive Appalachian land into hyperscale-ready campuses for the AI economy.">
-  <meta name="twitter:image" content="https://appinfra.ai/assets/appinfra-og-image.png">
+  <meta name="twitter:image" content="https://appinfra.ai/assets/images/appinfra-og-image.png">
   <meta name="robots" content="noindex">
 
   <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" media="(prefers-color-scheme: light)" />
@@ -60,9 +61,13 @@
       --label: 0.08em;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -78,11 +83,19 @@
       font-feature-settings: "kern", "liga", "calt";
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-    img { max-width: 100%; display: block; }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-    :focus { outline: none; }
+    :focus {
+      outline: none;
+    }
 
     :focus-visible {
       outline: 2px solid var(--terra);
@@ -112,10 +125,15 @@
       z-index: 10;
     }
 
-    .skip-link:focus { transform: translateY(0); }
+    .skip-link:focus {
+      transform: translateY(0);
+    }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+
+      *,
+      *::before,
+      *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
@@ -155,7 +173,7 @@
     .brand-mark {
       width: 60px;
       height: 60px;
-      border: 1.5px solid rgba(255,255,255,.92);
+      border: 1.5px solid rgba(255, 255, 255, .92);
       display: grid;
       place-items: center;
       font-family: var(--mono);
@@ -184,7 +202,7 @@
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: var(--label);
-      color: rgba(255,255,255,.72);
+      color: rgba(255, 255, 255, .72);
       display: inline-flex;
       align-items: center;
       gap: 0.55em;
@@ -195,13 +213,13 @@
       width: 0.28em;
       height: 0.28em;
       border-radius: 50%;
-      background: rgba(255,255,255,.6);
+      background: rgba(255, 255, 255, .6);
     }
 
     .nav-toggle {
       display: none;
       background: transparent;
-      border: 1px solid rgba(255,255,255,.4);
+      border: 1px solid rgba(255, 255, 255, .4);
       width: 44px;
       height: 44px;
       padding: 0;
@@ -220,9 +238,17 @@
       transition: transform .2s ease, opacity .2s ease;
     }
 
-    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
-    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(5.5px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-5.5px) rotate(-45deg);
+    }
 
     .nav-links {
       display: flex;
@@ -233,7 +259,7 @@
       font-size: 0.75rem;
       font-weight: 500;
       letter-spacing: var(--label);
-      color: rgba(255,255,255,.92);
+      color: rgba(255, 255, 255, .92);
     }
 
     .nav-links a {
@@ -241,18 +267,20 @@
       transition: opacity .15s ease;
     }
 
-    .nav-links a:hover { opacity: 1; }
+    .nav-links a:hover {
+      opacity: 1;
+    }
 
     .nav-links .contact {
       background: transparent;
       padding: 12px 22px;
-      border: 1px solid rgba(255,255,255,.55);
+      border: 1px solid rgba(255, 255, 255, .55);
       font-weight: 600;
       transition: background-color .15s ease, border-color .15s ease;
     }
 
     .nav-links .contact:hover {
-      background: rgba(255,255,255,.08);
+      background: rgba(255, 255, 255, .08);
       border-color: var(--white);
     }
 
@@ -312,7 +340,7 @@
       line-height: 1.5;
       letter-spacing: -0.005em;
       margin: 0 0 1rem;
-      color: rgba(255,255,255,.94);
+      color: rgba(255, 255, 255, .94);
     }
 
     .hero-secondary {
@@ -323,7 +351,7 @@
       letter-spacing: var(--label);
       text-transform: uppercase;
       font-family: var(--mono);
-      color: rgba(255,255,255,.72);
+      color: rgba(255, 255, 255, .72);
       margin: 0 0 2.5rem;
       padding-left: 14px;
       border-left: 1.5px solid var(--terra);
@@ -347,7 +375,7 @@
       font-size: 0.8125rem;
       font-weight: 600;
       letter-spacing: 0.06em;
-      border: 1px solid rgba(255,255,255,.78);
+      border: 1px solid rgba(255, 255, 255, .78);
       transition: background-color .2s ease, border-color .2s ease, color .2s ease;
       cursor: pointer;
     }
@@ -364,7 +392,7 @@
     }
 
     .btn:not(.filled):hover {
-      background: rgba(255,255,255,.08);
+      background: rgba(255, 255, 255, .08);
       border-color: var(--white);
     }
 
@@ -453,7 +481,9 @@
       border-right: 1px solid var(--line);
     }
 
-    .solution-card:last-child { border-right: none; }
+    .solution-card:last-child {
+      border-right: none;
+    }
 
     .circle {
       width: 80px;
@@ -529,7 +559,9 @@
       margin: 0 0 1.125rem;
     }
 
-    .why-wv p:last-child { margin-bottom: 0; }
+    .why-wv p:last-child {
+      margin-bottom: 0;
+    }
 
     .why-wv p strong {
       color: var(--green-900);
@@ -541,7 +573,7 @@
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,.42) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .42) 100%),
         url("./assets/images/forest-ridge.jpg");
       background-size: cover;
       background-position: center;
@@ -559,7 +591,7 @@
       letter-spacing: -0.012em;
       max-width: 22rem;
       line-height: 1.18;
-      text-shadow: 0 2px 14px rgba(0,0,0,.5);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, .5);
     }
 
     /* TEAM */
@@ -598,7 +630,7 @@
       font-weight: 400;
       line-height: 1.65;
       letter-spacing: -0.005em;
-      color: rgba(255,255,255,.88);
+      color: rgba(255, 255, 255, .88);
     }
 
     .team .tag {
@@ -649,7 +681,7 @@
       line-height: 1.55;
       letter-spacing: -0.005em;
       margin: 0 0 1.75rem;
-      color: rgba(255,255,255,.92);
+      color: rgba(255, 255, 255, .92);
     }
 
     .cta-trust {
@@ -658,7 +690,7 @@
       font-size: 0.9375rem;
       line-height: 1.55;
       letter-spacing: -0.005em;
-      color: rgba(255,255,255,.86);
+      color: rgba(255, 255, 255, .86);
       border-left: 3px solid var(--terra);
       padding: 4px 0 4px 18px;
       margin: 0 0 22px;
@@ -676,16 +708,18 @@
       font-family: var(--serif);
       font-style: italic;
       font-size: 1.0625rem;
-      color: rgba(255,255,255,.88);
+      color: rgba(255, 255, 255, .88);
       margin: 0;
     }
 
     .cta-direct a {
-      border-bottom: 1px solid rgba(255,255,255,.4);
+      border-bottom: 1px solid rgba(255, 255, 255, .4);
       transition: border-color .15s ease;
     }
 
-    .cta-direct a:hover { border-color: var(--white); }
+    .cta-direct a:hover {
+      border-color: var(--white);
+    }
 
     .inquiry-form {
       display: grid;
@@ -700,7 +734,7 @@
       text-transform: uppercase;
       letter-spacing: var(--label);
       font-weight: 500;
-      color: rgba(255,255,255,.78);
+      color: rgba(255, 255, 255, .78);
       margin-bottom: 6px;
     }
 
@@ -709,8 +743,8 @@
     .inquiry-form textarea {
       width: 100%;
       padding: 14px 16px;
-      border: 1px solid rgba(255,255,255,.32);
-      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255, 255, 255, .32);
+      background: rgba(255, 255, 255, .06);
       color: var(--white);
       font-family: var(--sans);
       font-size: 0.9375rem;
@@ -725,7 +759,7 @@
     .inquiry-form select:focus,
     .inquiry-form textarea:focus {
       border-color: var(--terra);
-      background: rgba(255,255,255,.10);
+      background: rgba(255, 255, 255, .10);
     }
 
     .inquiry-form select {
@@ -751,7 +785,7 @@
 
     .inquiry-form input::placeholder,
     .inquiry-form textarea::placeholder {
-      color: rgba(255,255,255,.5);
+      color: rgba(255, 255, 255, .5);
     }
 
     .form-submit {
@@ -774,11 +808,16 @@
       letter-spacing: var(--label);
       margin-top: 4px;
       min-height: 1em;
-      color: rgba(255,255,255,.78);
+      color: rgba(255, 255, 255, .78);
     }
 
-    .form-status.is-ok { color: #cfe9d6; }
-    .form-status.is-err { color: #f2c2af; }
+    .form-status.is-ok {
+      color: #cfe9d6;
+    }
+
+    .form-status.is-err {
+      color: #f2c2af;
+    }
 
     button[disabled] {
       opacity: .6;
@@ -801,8 +840,13 @@
       border-top: 1px solid var(--line);
     }
 
-    footer a { transition: color .15s ease; }
-    footer a:hover { color: var(--green-900); }
+    footer a {
+      transition: color .15s ease;
+    }
+
+    footer a:hover {
+      color: var(--green-900);
+    }
 
     .footer-brand {
       display: flex;
@@ -875,11 +919,17 @@
 
     /* MOBILE */
     @media (max-width: 980px) {
-      .hero { min-height: 720px; }
+      .hero {
+        min-height: 720px;
+      }
 
-      .nav { padding: 24px; }
+      .nav {
+        padding: 24px;
+      }
 
-      .nav-toggle { display: inline-flex; }
+      .nav-toggle {
+        display: inline-flex;
+      }
 
       .nav-links {
         display: none;
@@ -894,28 +944,42 @@
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
         padding: 8px 24px 20px;
-        border-top: 1px solid rgba(255,255,255,.12);
+        border-top: 1px solid rgba(255, 255, 255, .12);
       }
 
-      .nav-links.is-open { display: flex; }
+      .nav-links.is-open {
+        display: flex;
+      }
 
       .nav-links a {
         padding: 16px 0;
-        border-bottom: 1px solid rgba(255,255,255,.08);
+        border-bottom: 1px solid rgba(255, 255, 255, .08);
       }
 
       .nav-links .contact {
         margin-top: 12px;
         padding: 14px 18px;
         text-align: center;
-        border-bottom: 1px solid rgba(255,255,255,.55);
+        border-bottom: 1px solid rgba(255, 255, 255, .55);
       }
 
-      .brand-name { font-size: 1.125rem; }
-      .brand-mark { width: 48px; height: 48px; font-size: 1.125rem; }
-      .brand-sub { font-size: 0.625rem; }
+      .brand-name {
+        font-size: 1.125rem;
+      }
 
-      .hero-copy { padding: 92px 24px 64px; }
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        font-size: 1.125rem;
+      }
+
+      .brand-sub {
+        font-size: 0.625rem;
+      }
+
+      .hero-copy {
+        padding: 92px 24px 64px;
+      }
 
       .three-col,
       .why-wv,
@@ -931,17 +995,30 @@
         padding: 32px 18px;
       }
 
-      .solution-card:last-child { border-bottom: none; }
+      .solution-card:last-child {
+        border-bottom: none;
+      }
 
-      .why-wv { gap: 36px; }
+      .why-wv {
+        gap: 36px;
+      }
 
-      .wv-image { min-height: 300px; }
+      .wv-image {
+        min-height: 300px;
+      }
 
-      .btn { width: 100%; min-width: auto; }
+      .btn {
+        width: 100%;
+        min-width: auto;
+      }
 
-      section { padding: 64px 7%; }
+      section {
+        padding: 64px 7%;
+      }
 
-      .cta { padding: 64px 7% 72px; }
+      .cta {
+        padding: 64px 7% 72px;
+      }
     }
   </style>
 </head>
